@@ -1,5 +1,4 @@
-import React, { useState, useRef } from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import {
   sil,
@@ -54,8 +53,8 @@ const DepoGiriş = (props) => {
           >
             <span>
               <label
-                for="exampleInputE1"
-                class="form-label d-inline"
+                htmlFor="exampleInputE1"
+                className="form-label d-inline"
                 style={{ text: "center" }}
               >
                 Belge Numarası *
@@ -64,7 +63,7 @@ const DepoGiriş = (props) => {
             <span>
               <input
                 type="text"
-                class="form-control d-inline exampleInputEmail1"
+                className="form-control d-inline exampleInputEmail1"
                 id="exampleInputE1"
                 value={belgeNo}
                 onChange={(e) => setBelgeNo(e.target.value)}
@@ -78,8 +77,8 @@ const DepoGiriş = (props) => {
           >
             <span>
               <label
-                for="exampleInputEmail1"
-                class="form-label d-inline"
+                htmlFor="exampleInputEmail1"
+                className="form-label d-inline"
                 style={{ text: "center" }}
               >
                 Ürünlerin Alındığı Şirket *
@@ -88,7 +87,7 @@ const DepoGiriş = (props) => {
             <span>
               <input
                 type="text"
-                class="form-control d-inline exampleInputEmail1"
+                className="form-control d-inline exampleInputEmail1"
                 id="exampleInputEmail1"
                 value={alınanŞirket}
                 onChange={(e) => setAlınanŞirket(e.target.value)}
@@ -100,12 +99,12 @@ const DepoGiriş = (props) => {
             className="mb-3 d-flex "
             style={{ justifyContent: "space-between" }}
           >
-            <label for="exampleInputPassword1" class="form-label">
+            <label htmlFor="exampleInputPassword1" className="form-label">
               Satcının İsmi
             </label>
             <input
               type="name"
-              class="form-control exampleInputEmail1"
+              className="form-control exampleInputEmail1"
               id="exampleInputPassword1"
               value={satıcı}
               onChange={(e) => setSatıcı(e.target.value)}
@@ -116,12 +115,12 @@ const DepoGiriş = (props) => {
             className="mb-3 d-flex "
             style={{ justifyContent: "space-between" }}
           >
-            <label for="exampleInputPassword" class="form-label">
+            <label htmlFor="exampleInputPassword" className="form-label">
               Alıcının İsmi
             </label>
             <input
               type="name"
-              class="form-control exampleInputEmail1"
+              className="form-control exampleInputEmail1"
               id="exampleInputPassword"
               value={alıcı}
               onChange={(e) => setAlıcı(e.target.value)}
@@ -131,12 +130,12 @@ const DepoGiriş = (props) => {
             className="mb-3 d-flex "
             style={{ justifyContent: "space-between" }}
           >
-            <label for="exampleInputPasswo" class="form-label">
+            <label htmlFor="exampleInputPasswo" className="form-label">
               Açıklama
             </label>
             <input
               type="name"
-              class="form-control exampleInputEmail1"
+              className="form-control exampleInputEmail1"
               id="exampleInputPasswo"
               value={açıklama}
               onChange={(e) => setAçıklama(e.target.value)}
@@ -147,14 +146,14 @@ const DepoGiriş = (props) => {
             className="mb-3 d-flex "
             style={{ justifyContent: "space-between" }}
           >
-            <label for="exampleInputPasswoq" class="form-label">
+            <label htmlFor="exampleInputPasswoq" className="form-label">
               Alış Tarihi *
             </label>
             <input
               min="1899-01-01"
               max={today}
               type="date"
-              class="form-control exampleInputEmail1"
+              className="form-control exampleInputEmail1"
               id="exampleInputPasswoq"
               value={tarih}
               onChange={(e) => setTarih(e.target.value)}
@@ -178,12 +177,12 @@ const DepoGiriş = (props) => {
               <th scope="col">Birim</th>
             </tr>
           </thead>
-          <tbody lassName="idid1" className="deneme2">
+          <tbody className="idid1 deneme2">
             {props.mydata.alınıyor.map((item) => (
               <tr key={Math.random()}>
                 <th className="idid1">
                   <svg
-                    lassName="idid1"
+                    className="idid1 bi bi-x-lg"
                     onClick={() => props.sil(item.id)}
                     style={{ cursor: "pointer" }}
                     color="red"
@@ -191,7 +190,6 @@ const DepoGiriş = (props) => {
                     width="16"
                     height="16"
                     fill="currentColor"
-                    class="bi bi-x-lg"
                     viewBox="0 0 16 16"
                   >
                     <path d="M1.293 1.293a1 1 0 0 1 1.414 0L8 6.586l5.293-5.293a1 1 0 1 1 1.414 1.414L9.414 8l5.293 5.293a1 1 0 0 1-1.414 1.414L8 9.414l-5.293 5.293a1 1 0 0 1-1.414-1.414L6.586 8 1.293 2.707a1 1 0 0 1 0-1.414z" />
@@ -200,7 +198,7 @@ const DepoGiriş = (props) => {
                 <th className="idid1">{item.id}</th>
                 <td className="idid1">{item.ürün}</td>
                 <td className="idid1">
-                  <img className="listemm" width={"40"} src={item.fotograf} />
+                  <img className="listemm" width={"40"} src={item.fotograf} alt="photo3" />
                 </td>
                 <td className="idid1">{item.sınıf}</td>
                 <td className="idid1">
@@ -264,7 +262,7 @@ const DepoGiriş = (props) => {
                   "Satın Alma İşlemini Onaylıyor Musunuz ?"
                 );
 
-                if (onay == true) {
+                if (onay === true) {
                   for (let i = 1; i < props.mydata.alınıyor.length + 1; i++) {
                     props.artılarıEkleme(
                       enn,
@@ -277,17 +275,15 @@ const DepoGiriş = (props) => {
                     );
                   }
 
-
-
                   for (let i = 1; i < props.mydata.alınıyor.length + 1; i++) {
                     props.urunHareketiEkle(
-                    enn,
-                    alıcı,
-                    alınanŞirket,
-                    açıklama,
-                    belgeNo,
-                    satıcı,
-                    tarih,
+                      enn,
+                      alıcı,
+                      alınanŞirket,
+                      açıklama,
+                      belgeNo,
+                      satıcı,
+                      tarih,
                       document.querySelector(
                         `.deneme2 > tr:nth-child( ${i} ) > th:nth-child(2)`
                       ).innerHTML,
@@ -296,7 +292,6 @@ const DepoGiriş = (props) => {
                       ).value
                     );
                   }
-
 
                   props.sonEkleme(
                     enn,
@@ -322,9 +317,7 @@ const DepoGiriş = (props) => {
             props.mydata.yapılanAlışlar.find((alış) =>
               alış[0].belgeNo === belgeNo
                 ? props.mydata.yapılanAlışlar.find((alış) =>
-                    alış[0].belgeNo === belgeNo
-                      ? (BelgeVarMı = 1)
-                      : {}
+                    alış[0].belgeNo === belgeNo ? (BelgeVarMı = 1) : {}
                   )
                 : {}
             );

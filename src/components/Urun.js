@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
@@ -14,7 +14,6 @@ import {
   link2,
   alışİşlemiSilme,
   artılarıSilme,
-  urun2,
 } from "../actions";
 
 const Urun = (props) => {

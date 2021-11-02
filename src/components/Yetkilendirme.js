@@ -1,9 +1,6 @@
 
 import React, {useState} from "react";
-import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { sepeteEkle } from "../actions";
-import { Alert } from "react-bootstrap";
 import {
   girişDeğiş,
   çıkışDeğiş,
@@ -49,7 +46,7 @@ const Yetkilendirme = (props) => {
                       width="16"
                       height="16"
                       fill="currentColor"
-                      class="bi bi-check-square"
+                      className="bi bi-check-square"
                       viewBox="0 0 16 16"
                     >
                       <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
@@ -62,7 +59,7 @@ const Yetkilendirme = (props) => {
                       width="16"
                       height="16"
                       fill="currentColor"
-                      class="bi bi-square"
+                      className="bi bi-square"
                       viewBox="0 0 16 16"
                     >
                       <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
@@ -77,7 +74,7 @@ const Yetkilendirme = (props) => {
                       width="16"
                       height="16"
                       fill="currentColor"
-                      class="bi bi-check-square"
+                      className="bi bi-check-square"
                       viewBox="0 0 16 16"
                     >
                       <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
@@ -90,7 +87,7 @@ const Yetkilendirme = (props) => {
                       width="16"
                       height="16"
                       fill="currentColor"
-                      class="bi bi-square"
+                      className="bi bi-square"
                       viewBox="0 0 16 16"
                     >
                       <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
@@ -106,7 +103,7 @@ const Yetkilendirme = (props) => {
                       width="16"
                       height="16"
                       fill="currentColor"
-                      class="bi bi-check-square"
+                      className="bi bi-check-square"
                       viewBox="0 0 16 16"
                     >
                       <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
@@ -119,7 +116,7 @@ const Yetkilendirme = (props) => {
                       width="16"
                       height="16"
                       fill="currentColor"
-                      class="bi bi-square"
+                      className="bi bi-square"
                       viewBox="0 0 16 16"
                     >
                       <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
@@ -134,7 +131,7 @@ const Yetkilendirme = (props) => {
       </div>
 
       <button
-        class="btn btn-primary d-block m-2"
+        className="btn btn-primary d-block m-2"
         type="button"
         data-bs-toggle="offcanvas"
         data-bs-target="#offcanvasRight"
@@ -144,8 +141,8 @@ const Yetkilendirme = (props) => {
       </button>
 
       <div
-        class="offcanvas offcanvas-end"
-        tabindex="-1"
+        className="offcanvas offcanvas-end"
+        tabIndex="-1"
         id="offcanvasRight"
         aria-labelledby="offcanvasRightLabel"
       >
@@ -173,7 +170,7 @@ const Yetkilendirme = (props) => {
                   width="16"
                   height="16"
                   fill="currentColor"
-                  class="bi bi-check-square"
+                  className="bi bi-check-square"
                   viewBox="0 0 16 16"
                 >
                   <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
@@ -181,13 +178,12 @@ const Yetkilendirme = (props) => {
                 </svg>
               ) : (
                 <svg
-                  className="d-inline"
+                  className="d-inline bi bi-square"
                   onClick={() => setGirş(!girş)}
                   xmlns="http://www.w3.org/2000/svg"
                   width="16"
                   height="16"
                   fill="currentColor"
-                  class="bi bi-square"
                   viewBox="0 0 16 16"
                 >
                   <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
@@ -205,7 +201,7 @@ const Yetkilendirme = (props) => {
                   width="16"
                   height="16"
                   fill="currentColor"
-                  class="bi bi-check-square"
+                  className="bi bi-check-square"
                   viewBox="0 0 16 16"
                 >
                   <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
@@ -213,13 +209,12 @@ const Yetkilendirme = (props) => {
                 </svg>
               ) : (
                 <svg
-                  className="d-inline"
+                  className="d-inline bi bi-square"
                   onClick={() => setÇıkş(!çıkş)}
                   xmlns="http://www.w3.org/2000/svg"
                   width="16"
                   height="16"
                   fill="currentColor"
-                  class="bi bi-square"
                   viewBox="0 0 16 16"
                 >
                   <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
@@ -237,7 +232,7 @@ const Yetkilendirme = (props) => {
                   width="16"
                   height="16"
                   fill="currentColor"
-                  class="bi bi-check-square"
+                  className="bi bi-check-square"
                   viewBox="0 0 16 16"
                 >
                   <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
@@ -245,13 +240,12 @@ const Yetkilendirme = (props) => {
                 </svg>
               ) : (
                 <svg
-                  className="d-inline"
+                  className="d-inline bi bi-square"
                   onClick={() => setİşlm(!işlm)}
                   xmlns="http://www.w3.org/2000/svg"
                   width="16"
                   height="16"
                   fill="currentColor"
-                  class="bi bi-square"
                   viewBox="0 0 16 16"
                 >
                   <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
@@ -280,7 +274,7 @@ const Yetkilendirme = (props) => {
                       kullanıcı +
                         " " +
                         "adlı personeli sisteme kaydetmek istediğinizden emin misiniz?"
-                    ) == true
+                    ) === true
                   ) {
                     props.kullanıcıEkle(kullanıcı, girş, çıkş, işlm);
                     setKullanıcı("");
@@ -298,7 +292,7 @@ const Yetkilendirme = (props) => {
       </div>
 
       <button
-        class="btn btn-danger d-block m-2"
+        className="btn btn-danger d-block m-2"
         type="button"
         data-bs-toggle="offcanvas"
         data-bs-target="#offcanvasRight1"
@@ -308,8 +302,8 @@ const Yetkilendirme = (props) => {
       </button>
 
       <div
-        class="offcanvas offcanvas-end"
-        tabindex="-1"
+        className="offcanvas offcanvas-end"
+        tabIndex="-1"
         id="offcanvasRight1"
         aria-labelledby="offcanvasRightLabel"
       >
@@ -347,7 +341,7 @@ const Yetkilendirme = (props) => {
                       width="16"
                       height="16"
                       fill="currentColor"
-                      class="bi bi-x-lg"
+                      className="bi bi-x-lg"
                       viewBox="0 0 16 16"
                     >
                       <path d="M1.293 1.293a1 1 0 0 1 1.414 0L8 6.586l5.293-5.293a1 1 0 1 1 1.414 1.414L9.414 8l5.293 5.293a1 1 0 0 1-1.414 1.414L8 9.414l-5.293 5.293a1 1 0 0 1-1.414-1.414L6.586 8 1.293 2.707a1 1 0 0 1 0-1.414z" />

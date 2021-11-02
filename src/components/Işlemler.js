@@ -1,9 +1,6 @@
-import React, { useState, useRef } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-
-import { Route } from "react-router-dom";
-
 import {
   sil,
   giriş,
@@ -15,8 +12,6 @@ import {
   link,
   link2,
 } from "../actions";
-import Canvas from "./Canvas";
-import Deneme from "./Deneme";
 
 const Işlemler = (props) => {
   return (
@@ -52,17 +47,17 @@ const Işlemler = (props) => {
             <tbody>
               {props.mydata.yapılanAlışlar.map((item) => (
                 <tr key={Math.random()}>
-                  <Link
-                    className="linked"
-                    to={`/işlemler/alış_${item[0].belgeNo.toLowerCase()}`}
-                  >
+                 
                     <th
                       className="linked"
                       onClick={() => props.link(`${item[0].belgeNo}`)}
                     >
-                      {item[0].belgeNo}
+                       <Link
+                    className="linked"
+                    to={`/işlemler/alış_${item[0].belgeNo.toLowerCase()}`}
+                  >{item[0].belgeNo}</Link>
                     </th>{" "}
-                  </Link>
+                  
                   <td>{item[0].alınanŞirket}</td>
                   <td>{item[0].tarih}</td>
                   <td>{item[0].onayVerenKullanıcı}</td>
@@ -104,17 +99,17 @@ const Işlemler = (props) => {
             <tbody>
               {props.mydata.yapılanSatışlar.map((item) => (
                 <tr key={Math.random()}>
-                  <Link
+                  <th
                     className="linked"
-                    to={`/işlemler/satış_${item[0].belgeNo.toLowerCase()}`}
+                    onClick={() => props.link2(`${item[0].belgeNo}`)}
                   >
-                    <th
+                    <Link
                       className="linked"
-                      onClick={() => props.link2(`${item[0].belgeNo}`)}
+                      to={`/işlemler/satış_${item[0].belgeNo.toLowerCase()}`}
                     >
                       {item[0].belgeNo}
-                    </th>{" "}
-                  </Link>
+                    </Link>
+                  </th>{" "}
                   <td>{item[0].alınanŞirket}</td>
                   <td>{item[0].tarih}</td>
                   <td>{item[0].onayVerenKullanıcı}</td>
@@ -126,7 +121,7 @@ const Işlemler = (props) => {
       </div>
     </div>
   );
-}
+};
 
 const mapStateToProps = (state) => {
   return {

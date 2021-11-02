@@ -29,17 +29,19 @@ import {
           <tbody>
             {props.mydata.data.map((item) => (
               <tr key={Math.random()}>
-                <Link className="idid" to={`/${item.id}`.toLowerCase()}>
                   <th className="idid" onClick={() => props.urun2(item.id)}>
+                <Link className="idid" to={`/${item.id}`.toLowerCase()}>
+
                     {item.id}
+ </Link>
                   </th>
-                </Link>
+               
                 <td className="idid1">{item.ürün}</td>
                 <td className="idid1">{item.stok}</td>
                 <td className="idid1">{item.birim}</td>
                 <td className="idid1">{item.sınıf}</td>
                 <td>
-                  <img className="listemm" width={"40"} src={item.fotograf} />
+                  <img className="listemm" width={"40"} src={item.fotograf} alt="photo2" />
                 </td>
               </tr>
             ))}

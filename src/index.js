@@ -5,9 +5,6 @@ import App from "./App";
 import { createStore } from "redux";
 import { reducer } from "./reducers/index";
 import { Provider } from "react-redux";
-import { persistStore, persistReducer } from "redux-persist";
-import storage from "redux-persist/lib/storage";
-
 
 
 const store = createStore(

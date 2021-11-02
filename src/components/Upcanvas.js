@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import {
   sil,
@@ -10,7 +9,6 @@ import {
   birim,
   yeniÜrünEkle,
 } from "../actions";
-import { Alert } from "react-bootstrap";
 
 const Upcanvas = (props) => {
   const [ekle, setEkle] = useState("");
@@ -22,10 +20,10 @@ const Upcanvas = (props) => {
   const [urunBirim, setUrunBirim] = useState("");
   return (
     <div>
-      <div class="accordion-item yeniEkle">
-        <h2 class="accordion-header" id="headingThree">
+      <div className="accordion-item yeniEkle">
+        <h2 className="accordion-header" id="headingThree">
           <button
-            class="accordion-button collapsed bg-primary "
+            className="accordion-button collapsed bg-primary "
             style={{ color: "white" }}
             type="button"
             data-bs-toggle="collapse"
@@ -38,18 +36,18 @@ const Upcanvas = (props) => {
         </h2>
         <div
           id="collapseThree"
-          class="accordion-collapse collapse"
+          className="accordion-collapse collapse"
           aria-labelledby="headingThree"
           data-bs-parent="#accordionExample"
         >
-          <div class="accordion-body">
+          <div className="accordion-body">
             <form
               onSubmit={(e) => {
-setUrunAdı("")
-setUrunId("");
-setUrunSınıf("");
-setUrunFoto("");
-setUrunBirim("");
+                setUrunAdı("");
+                setUrunId("");
+                setUrunSınıf("");
+                setUrunFoto("");
+                setUrunBirim("");
                 e.preventDefault();
                 props.yeniÜrünEkle(
                   e,
@@ -86,36 +84,42 @@ setUrunBirim("");
                 }}
               >
                 <select
+                  key={Math.random()}
                   style={{ width: "295px", height: "38px" }}
-                  class="form-select"
+                  className="form-select"
                   aria-label="Default select example"
+                  value={urunBirim}
                   onChange={(e) => setUrunBirim(e.target.value)}
                 >
-                  <option selected>Birim Seç</option>
+                  <option key={Math.random()} defaultValue>
+                    Birim Seç
+                  </option>
                   {props.mydata.birimler.map((birim) => (
-                    <option value={birim}>{birim}</option>
+                    <option key={Math.random()} value={birim}>
+                      {birim}
+                    </option>
                   ))}
                 </select>
 
                 <div
-                  class="input-group mb-3 "
+                  className="input-group mb-3 "
                   style={{ display: "flex", flexDirection: "row" }}
                 >
                   <button
                     onClick={() => {
-                    if 
-                    (ekleBirim === "" ){alert("Lütfen eklemek istediğiniz birimi girin")} else if 
-                    (ekleBirim === null ){alert("Lütfen eklemek istediğiniz birimi girin")} else if 
-                    
-                    (window.confirm(`${ekleBirim} birim olarak eklensin mi?`)) 
-                       {
-                      props.birim(ekleBirim);
-                      setEkleBirim("")} 
-
+                      if (ekleBirim === "") {
+                        alert("Lütfen eklemek istediğiniz birimi girin");
+                      } else if (ekleBirim === null) {
+                        alert("Lütfen eklemek istediğiniz birimi girin");
+                      } else if (
+                        window.confirm(`${ekleBirim} birim olarak eklensin mi?`)
+                      ) {
+                        props.birim(ekleBirim);
+                        setEkleBirim("");
+                      }
                     }}
-                    class="btn btn-outline-secondary"
+                    className="btn btn-outline-secondary btn-primarybtn btn-primary"
                     type="button"
-                    className="btn btn-primary"
                     style={{ border: "1px solid black" }}
                   >
                     <svg
@@ -123,7 +127,7 @@ setUrunBirim("");
                       width="16"
                       height="16"
                       fill="currentColor"
-                      class="bi bi-caret-left"
+                      className="bi bi-caret-left"
                       viewBox="0 0 16 16"
                     >
                       <path d="M10 12.796V3.204L4.519 8 10 12.796zm-.659.753-5.48-4.796a1 1 0 0 1 0-1.506l5.48-4.796A1 1 0 0 1 11 3.204v9.592a1 1 0 0 1-1.659.753z" />
@@ -135,8 +139,7 @@ setUrunBirim("");
                     value={ekleBirim}
                     type="text"
                     onChange={(e) => {
-                      setEkleBirim(e.target.value)
-                    
+                      setEkleBirim(e.target.value);
                     }}
                   />
                 </div>
@@ -152,37 +155,42 @@ setUrunBirim("");
                 }}
               >
                 <select
+                  key={Math.random()}
                   style={{ width: "295px", height: "38px" }}
-                  class="form-select"
+                  className="form-select"
                   aria-label="Default select example"
                   onChange={(e) => setUrunSınıf(e.target.value)}
+                  value={urunSınıf}
                 >
-                  <option selected>Sınıf Seç</option>
+                  <option key={Math.random()} defaultValue>
+                    Sınıf Seç
+                  </option>
                   {props.mydata.sınıflar.map((sınıf) => (
-                    <option value={sınıf}>{sınıf}</option>
+                    <option key={Math.random()} value={sınıf}>
+                      {sınıf}
+                    </option>
                   ))}
                 </select>
 
                 <div
-                  class="input-group mb-3 "
+                  className="input-group mb-3 "
                   style={{ display: "flex", flexDirection: "row" }}
                 >
                   <button
-                  onClick={() => {
-                    if 
-                    (ekle === "" ){alert("Lütfen eklemek istediğiniz sınıfı girin")} else if 
-                    (ekle === null ){alert("Lütfen eklemek istediğiniz sınıfı girin")} else if 
-                    
-                    (window.confirm(`${ekle} sınıf olarak eklensin mi?`)) 
-                       {
-                      props.sınıf(ekle);
-                      setEkle("")} 
-
+                    onClick={() => {
+                      if (ekle === "") {
+                        alert("Lütfen eklemek istediğiniz sınıfı girin");
+                      } else if (ekle === null) {
+                        alert("Lütfen eklemek istediğiniz sınıfı girin");
+                      } else if (
+                        window.confirm(`${ekle} sınıf olarak eklensin mi?`)
+                      ) {
+                        props.sınıf(ekle);
+                        setEkle("");
+                      }
                     }}
-
-                    class="btn btn-outline-secondary"
+                    className="btn btn-outline-secondary btn-primary"
                     type="button"
-                    className="btn btn-primary"
                     style={{ border: "1px solid black" }}
                   >
                     <svg
@@ -190,7 +198,7 @@ setUrunBirim("");
                       width="16"
                       height="16"
                       fill="currentColor"
-                      class="bi bi-caret-left"
+                      className="bi bi-caret-left"
                       viewBox="0 0 16 16"
                     >
                       <path d="M10 12.796V3.204L4.519 8 10 12.796zm-.659.753-5.48-4.796a1 1 0 0 1 0-1.506l5.48-4.796A1 1 0 0 1 11 3.204v9.592a1 1 0 0 1-1.659.753z" />
@@ -219,10 +227,7 @@ setUrunBirim("");
                 type="text"
                 placeholder="Fotograf Linki"
               />
-              <button
-                className="btn btn-primary w-100"
-                type="submit"
-              >
+              <button className="btn btn-primary w-100" type="submit">
                 Gönder
               </button>
             </form>

@@ -1,5 +1,4 @@
-import React, { useState, useRef } from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import { sil, giriş, belgeEkle } from "../actions";
 

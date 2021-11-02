@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
@@ -80,7 +80,7 @@ const Satışişlemi = (props) => {
                 </Link>{" "}
                 <td className="idid1">{item.ürün}</td>
                 <td className="idid1">
-                  <img className="listemm" width={"40"} src={item.fotograf} />
+                  <img className="listemm" width={"40"} src={item.fotograf} alt="photo1" />
                 </td>
                 <td className="idid1">{item.sınıf}</td>
                 <td className="idid1">{item.eksi}</td>

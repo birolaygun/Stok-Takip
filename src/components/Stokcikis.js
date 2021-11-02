@@ -1,5 +1,4 @@
-import React, { useState, useRef } from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import {
   sil2,
@@ -38,7 +37,7 @@ const Stokcikis = (props) => {
   return (
     <div>
       <br />
-      <h2 className="anaBaşlık" >Satış Yapma Belgesi Girişi</h2>
+      <h2 className="anaBaşlık">Satış Yapma Belgesi Girişi</h2>
       <div
         style={{
           margin: "20px",
@@ -53,8 +52,8 @@ const Stokcikis = (props) => {
           >
             <span>
               <label
-                for="exampleInputE1"
-                class="form-label d-inline"
+                htmlFor="exampleInputE1"
+                className="form-label d-inline"
                 style={{ text: "center" }}
               >
                 Belge Numarası *
@@ -63,7 +62,7 @@ const Stokcikis = (props) => {
             <span>
               <input
                 type="text"
-                class="form-control d-inline exampleInputEmail1"
+                className="form-control d-inline exampleInputEmail1"
                 id="exampleInputE1"
                 value={belgeNo}
                 onChange={(e) => setBelgeNo(e.target.value)}
@@ -77,8 +76,8 @@ const Stokcikis = (props) => {
           >
             <span>
               <label
-                for="exampleInputEmail1"
-                class="form-label d-inline"
+                htmlFor="exampleInputEmail1"
+                className="form-label d-inline"
                 style={{ text: "center" }}
               >
                 Ürünlerin Satıldığı Şirket *
@@ -87,7 +86,7 @@ const Stokcikis = (props) => {
             <span>
               <input
                 type="text"
-                class="form-control d-inline exampleInputEmail1"
+                className="form-control d-inline exampleInputEmail1"
                 id="exampleInputEmail1"
                 value={alınanŞirket}
                 onChange={(e) => setAlınanŞirket(e.target.value)}
@@ -99,12 +98,12 @@ const Stokcikis = (props) => {
             className="mb-3 d-flex "
             style={{ justifyContent: "space-between" }}
           >
-            <label for="exampleInputPassword1" class="form-label">
+            <label htmlFor="exampleInputPassword1" className="form-label">
               Satcının İsmi
             </label>
             <input
               type="name"
-              class="form-control exampleInputEmail1"
+              className="form-control exampleInputEmail1"
               id="exampleInputPassword1"
               value={satıcı}
               onChange={(e) => setSatıcı(e.target.value)}
@@ -115,12 +114,12 @@ const Stokcikis = (props) => {
             className="mb-3 d-flex "
             style={{ justifyContent: "space-between" }}
           >
-            <label for="exampleInputPassword" class="form-label">
+            <label htmlFor="exampleInputPassword" className="form-label">
               Alıcının İsmi
             </label>
             <input
               type="name"
-              class="form-control exampleInputEmail1"
+              className="form-control exampleInputEmail1"
               id="exampleInputPassword"
               value={alıcı}
               onChange={(e) => setAlıcı(e.target.value)}
@@ -130,12 +129,12 @@ const Stokcikis = (props) => {
             className="mb-3 d-flex "
             style={{ justifyContent: "space-between" }}
           >
-            <label for="exampleInputPasswo" class="form-label">
+            <label htmlFor="exampleInputPasswo" className="form-label">
               Açıklama
             </label>
             <input
               type="name"
-              class="form-control exampleInputEmail1"
+              className="form-control exampleInputEmail1"
               id="exampleInputPasswo"
               value={açıklama}
               onChange={(e) => setAçıklama(e.target.value)}
@@ -146,13 +145,13 @@ const Stokcikis = (props) => {
             className="mb-3 d-flex "
             style={{ justifyContent: "space-between" }}
           >
-            <label for="exampleInputPasswoq" class="form-label">
+            <label htmlFor="exampleInputPasswoq" className="form-label">
               Alış Tarihi *
             </label>
             <input
               max={today}
               type="date"
-              class="form-control exampleInputEmail1"
+              className="form-control exampleInputEmail1"
               id="exampleInputPasswoq"
               value={tarih}
               onChange={(e) => setTarih(e.target.value)}
@@ -182,7 +181,7 @@ const Stokcikis = (props) => {
               <tr key={Math.random()}>
                 <th className="idid1">
                   <svg
-                    className="idid1"
+                    className="idid1 bi bi-x-lg"
                     onClick={() => props.sil2(item.id)}
                     style={{ cursor: "pointer" }}
                     color="red"
@@ -190,7 +189,6 @@ const Stokcikis = (props) => {
                     width="16"
                     height="16"
                     fill="currentColor"
-                    class="bi bi-x-lg"
                     viewBox="0 0 16 16"
                   >
                     <path d="M1.293 1.293a1 1 0 0 1 1.414 0L8 6.586l5.293-5.293a1 1 0 1 1 1.414 1.414L9.414 8l5.293 5.293a1 1 0 0 1-1.414 1.414L8 9.414l-5.293 5.293a1 1 0 0 1-1.414-1.414L6.586 8 1.293 2.707a1 1 0 0 1 0-1.414z" />
@@ -199,7 +197,7 @@ const Stokcikis = (props) => {
                 <th className="idid1">{item.id}</th>
                 <td className="idid1">{item.ürün}</td>
                 <td>
-                  <img className="listemm" width={"40"} src={item.fotograf} />
+                  <img className="listemm" width={"40"} src={item.fotograf} alt="photo4" />
                 </td>
                 <td className="idid1">{item.sınıf}</td>
                 <td className="idid1">
@@ -293,7 +291,7 @@ const Stokcikis = (props) => {
               } else {
                 let onay = window.confirm("Satış İşlemini Onaylıyor Musunuz ?");
 
-                if (onay == true) {
+                if (onay === true) {
                   for (let i = 1; i < props.mydata.satılıyor.length + 1; i++) {
                     props.artılarıEkleme2(
                       enn,

@@ -1,4 +1,3 @@
-import { Component } from "react";
 import {
   data,
   giriş,
@@ -38,8 +37,7 @@ const INITIAL_STATE = {
 export const reducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case "GİRİŞ":
-      {
-        state.personel.find((perns) => perns.kullanıcıAdı === action.gkullanıcı)
+      { state.personel.find((perns) => perns.kullanıcıAdı === action.gkullanıcı)
           ? state.personel.find(
               (perns) => perns.kullanıcıAdı === action.gkullanıcı
             ).şifre === action.gşifre
@@ -155,26 +153,26 @@ export const reducer = (state = INITIAL_STATE, action) => {
           )
         : action.foto === ""
         ? alert("Lütfen Fotoğraf Linki giriniz")
-        : console.log("oldu");
+        : console.log(".");
 
       return {
         ...state,
 
         data:
           action.id === ""
-            ? [...data]
+            ? [...state.data]
             : state.data.find((item) => item.id === action.id)
-            ? [...data]
+            ? [...state.data]
             : action.ad === ""
-            ? [...data]
+            ? [...state.data]
             : action.snf === ""
-            ? [...data]
+            ? [...state.data]
             : action.brm === ""
-            ? [...data]
+            ? [...state.data]
             : action.foto === ""
-            ? [...data]
+            ? [...state.data]
             : [
-                ...data,
+                ...state.data,
                 {
                   id: action.id,
                   ürün: action.ad,
@@ -182,7 +180,7 @@ export const reducer = (state = INITIAL_STATE, action) => {
                   birim: action.brm,
                   fotograf: action.foto,
                   stok: 0,
-                },
+                }
               ],
       };
 

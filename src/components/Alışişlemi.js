@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
@@ -14,12 +14,10 @@ import {
   alışİşlemiSilme,
   artılarıSilme,
   ürünHareketiAlışSilme,
-  urun2
+  urun2,
 } from "../actions";
 
 const Alışişlemi = (props) => {
-  let aa = props.mydata.kullanıcı.yetkilendirme ? " to='/işlemler'" : "";
-
   let alış = props.mydata.yapılanAlışlar.find(
     (alış) => alış[0].belgeNo === props.mydata.alınıyor2
   );
@@ -71,17 +69,17 @@ const Alışişlemi = (props) => {
           <tbody className="deneme3">
             {alış[1].map((item) => (
               <tr key={Math.random()}>
-
-                <Link className="idid" to={`/${item.id}`.toLowerCase()}>
-                  <th onClick={(e)=>
-                  props.urun2(e.target.innerHTML)
-                  } 
-                  className="idid1 ortala1">{item.id}</th>
-                </Link>
-
+                <th
+                  onClick={(e) => props.urun2(e.target.innerHTML)}
+                  className="idid1 ortala1"
+                >
+                  <Link className="idid" to={`/${item.id}`.toLowerCase()}>
+                    {item.id}
+                  </Link>
+                </th>
                 <td className="idid1">{item.ürün}</td>
                 <td className="idid1">
-                  <img className="listemm" width={"40"} src={item.fotograf} />
+                  <img className="listemm" width={"40"} src={item.fotograf} alt="photo1" />
                 </td>
                 <td className="idid1">{item.sınıf}</td>
                 <td className="idid1">{item.artı}</td>
@@ -201,5 +199,5 @@ export default connect(mapStateToProps, {
   alışİşlemiSilme,
   artılarıSilme,
   ürünHareketiAlışSilme,
-  urun2
+  urun2,
 })(Alışişlemi);
