@@ -1,5 +1,7 @@
-Projemin Linki stok-takip.netlify.app
+Projemin Linki https://stok-takip.netlify.app/ 
+
 Projemi bu linkteki videomda detaylıca anlattım. izlemek için: https://youtu.be/NHQqDsnW-hg
+
 Repomun eski adı 'Depo'ydu sonradan değiştirdim.
 
 Bu projeyi React ve Redux kullanarak geliştirdim. 
