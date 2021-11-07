@@ -1,12 +1,48 @@
 import React from "react";
 import { connect } from "react-redux";
-import { sil2, giriş, satılıyor, yeniUrun } from "../actions";
+import {
+  login,
+  logout,
+  del,
+  deleteItem,
+  buying,
+  selling,
+  newProduct,
+  productClass,
+  unit,
+  addNewProduct,
+  
+  plus,
+  minus,
+  add,
+  push,
+  
+  
+  clearDocBuy,
+  clearDocSell,
+  buyyingLink,
+  sellingLink,
+  cancelBuyying,
+  cancelSelling,
+  cancelPlus,
+  cancelMinus,
+  changeEntery,
+  changeEscape,
+  changeProcess,
+  addPersonel,
+  deletePersonel,
+  product,
+  addProductProcess,
+  addingProductProcess,
+  deleteProductBuyying,
+  deleteProductSelling,
+} from "../actions";
 
 
-const Canvas2 = (props) => {
+const SellingCanvas = (props) => {
   return (
-    <div>
-      <div style={{}}>
+    <div className="canvas">
+      <div>
         <button
           style={{ float: "right", marginRight: "10px" }}
           className="btn btn-primary sticky"
@@ -40,7 +76,7 @@ const Canvas2 = (props) => {
       >
         <div className="offcanvas-header">
           <div>
-            <div style={{}}></div>
+            <div></div>
 
             <div
               className="offcanvas offcanvas-end"
@@ -68,19 +104,19 @@ const Canvas2 = (props) => {
                   </thead>
 
                   <tbody>
-                    {props.mydata.data.map((item) => (
+                    {props.mydata.repository.map((item) => (
                       <tr key={Math.random()}>
                         <th>
                           <div>
-                            {props.mydata.satılıyor.find(
-                              (checkle) => item.id === checkle.id
+                            {props.mydata.sellingNow.find(
+                              (check) => item.id === check.id
                             ) ? (
-                              props.mydata.satılıyor.map(
-                                (checkle) => item.id === checkle.id
+                              props.mydata.sellingNow.map(
+                                (check) => item.id === check.id
                               ) ? (
                                 <svg
                                   key={Math.random()}
-                                  onClick={() => props.sil2(item.id)}
+                                  onClick={() => props.deleteItem(item.id)}
                                   xmlns="http://www.w3.org/2000/svg"
                                   width="16"
                                   height="16"
@@ -97,7 +133,7 @@ const Canvas2 = (props) => {
                             ) : (
                               <svg
                                 key={Math.random()}
-                                onClick={() => props.satılıyor(item)}
+                                onClick={() => props.selling(item)}
                                 xmlns="http://www.w3.org/2000/svg"
                                 width="16"
                                 height="16"
@@ -111,8 +147,8 @@ const Canvas2 = (props) => {
                           </div>
                         </th>
                         <th>{item.id}</th>
-                        <td>{item.ürün}</td>
-                        <td>{item.sınıf}</td>
+                        <td>{item.productName}</td>
+                        <td>{item.productClass}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -140,19 +176,19 @@ const Canvas2 = (props) => {
             </thead>
 
             <tbody>
-              {props.mydata.data.map((item) => (
+              {props.mydata.repository.map((item) => (
                 <tr key={Math.random()}>
                   <th>
                     <div>
-                      {props.mydata.satılıyor.find(
-                        (checkle) => checkle.id === item.id
+                      {props.mydata.sellingNow.find(
+                        (check) => check.id === item.id
                       ) ? (
-                        props.mydata.satılıyor.map(
-                          (checkle) => checkle.id === item.id
+                        props.mydata.sellingNow.map(
+                          (check) => check.id === item.id
                         ) ? (
                           <svg
                             key={Math.random()}
-                            onClick={() => props.sil2(item.id)}
+                            onClick={() => props.deleteItem(item.id)}
                             xmlns="http://www.w3.org/2000/svg"
                             width="16"
                             height="16"
@@ -169,7 +205,7 @@ const Canvas2 = (props) => {
                       ) : (
                         <svg
                           key={Math.random()}
-                          onClick={() => props.satılıyor(item)}
+                          onClick={() => props.selling(item)}
                           xmlns="http://www.w3.org/2000/svg"
                           width="16"
                           height="16"
@@ -183,8 +219,8 @@ const Canvas2 = (props) => {
                     </div>
                   </th>
                   <th>{item.id}</th>
-                  <td>{item.ürün}</td>
-                  <td>{item.sınıf}</td>
+                  <td>{item.productName}</td>
+                  <td>{item.productClass}</td>
                 </tr>
               ))}
             </tbody>
@@ -201,6 +237,39 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { sil2, giriş, satılıyor, yeniUrun })(
-  Canvas2
-);
+export default connect(mapStateToProps, {
+  login,
+  logout,
+  del,
+  deleteItem,
+  buying,
+  selling,
+  newProduct,
+  productClass,
+  unit,
+  addNewProduct,
+
+  plus,
+  minus,
+  add,
+  push,
+
+  clearDocBuy,
+  clearDocSell,
+  buyyingLink,
+  sellingLink,
+  cancelBuyying,
+  cancelSelling,
+  cancelPlus,
+  cancelMinus,
+  changeEntery,
+  changeEscape,
+  changeProcess,
+  addPersonel,
+  deletePersonel,
+  product,
+  addProductProcess,
+  addingProductProcess,
+  deleteProductBuyying,
+  deleteProductSelling,
+})(SellingCanvas);

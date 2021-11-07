@@ -1,43 +1,71 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import {
-  sil2,
-  giriş,
-  belgeEkle,
-  artılarıEkleme2,
-  sonEkleme2,
-  eklemeHatası,
-  belgeyiTemizle2,
-  ürünHareketiEkleme,
+  login,
+  logout,
+  del,
+  deleteItem,
+  buying,
+  selling,
+  newProduct,
+  productClass,
+  unit,
+  addNewProduct,
+  
+  plus,
+  minus,
+  add,
+  push,
+  
+  
+  clearDocBuy,
+  clearDocSell,
+  buyyingLink,
+  sellingLink,
+  cancelBuyying,
+  cancelSelling,
+  cancelPlus,
+  cancelMinus,
+  changeEntery,
+  changeEscape,
+  changeProcess,
+  addPersonel,
+  deletePersonel,
+  product,
+  addProductProcess,
+  addingProductProcess,
+  deleteProductBuyying,
+  deleteProductSelling,
 } from "../actions";
-import Canvas2 from "./Canvas2";
-import Deneme2 from "./Deneme2";
+import BuyingCanvas from "./BuyingCanvas";
+import BuyingValue from "./BuyingValue";
 
-const Stokcikis = (props) => {
-  const [belgeNo, setBelgeNo] = useState("");
-  const [alınanŞirket, setAlınanŞirket] = useState("");
-  const [satıcı, setSatıcı] = useState("");
-  const [alıcı, setAlıcı] = useState("");
-  const [açıklama, setAçıklama] = useState("");
-  const [tarih, setTarih] = useState("");
+const Buying = (props) => {
+  const [docNo, setDocNo] = useState("");
+  const [company, setCompany] = useState("");
+  const [seller, setSeller] = useState("");
+  const [costumer, setCostumer] = useState("");
+  const [explatation, setExplatation] = useState("");
+  const [shoppingDate, setShoppingDate] = useState("");
 
-    var today = new Date();
-    var dd = today.getDate();
-    var mm = today.getMonth() + 1; //January is 0!
-    var yyyy = today.getFullYear();
-    if (dd < 10) {
-      dd = "0" + dd;
-    }
-    if (mm < 10) {
-      mm = "0" + mm;
-    }
-    today = yyyy + "-" + mm + "-" + dd;
+
+  var today = new Date();
+  var dd = today.getDate();
+  var mm = today.getMonth() + 1;
+  var yyyy = today.getFullYear();
+  if (dd < 10) {
+    dd = "0" + dd;
+  }
+  if (mm < 10) {
+    mm = "0" + mm;
+  }
+  today = yyyy + "-" + mm + "-" + dd;
 
 
   return (
     <div>
       <br />
-      <h2 className="anaBaşlık">Satış Yapma Belgesi Girişi</h2>
+      <h2 className="mainHead">Satın Alma Belgesi Oluştur</h2>
       <div
         style={{
           margin: "20px",
@@ -64,8 +92,8 @@ const Stokcikis = (props) => {
                 type="text"
                 className="form-control d-inline exampleInputEmail1"
                 id="exampleInputE1"
-                value={belgeNo}
-                onChange={(e) => setBelgeNo(e.target.value)}
+                value={docNo}
+                onChange={(e) => setDocNo(e.target.value)}
               />
             </span>
           </div>
@@ -80,7 +108,7 @@ const Stokcikis = (props) => {
                 className="form-label d-inline"
                 style={{ text: "center" }}
               >
-                Ürünlerin Satıldığı Şirket *
+                Ürünlerin Alındığı Şirket *
               </label>
             </span>
             <span>
@@ -88,8 +116,8 @@ const Stokcikis = (props) => {
                 type="text"
                 className="form-control d-inline exampleInputEmail1"
                 id="exampleInputEmail1"
-                value={alınanŞirket}
-                onChange={(e) => setAlınanŞirket(e.target.value)}
+                value={company}
+                onChange={(e) => setCompany(e.target.value)}
               />
             </span>
           </div>
@@ -105,8 +133,8 @@ const Stokcikis = (props) => {
               type="name"
               className="form-control exampleInputEmail1"
               id="exampleInputPassword1"
-              value={satıcı}
-              onChange={(e) => setSatıcı(e.target.value)}
+              value={seller}
+              onChange={(e) => setSeller(e.target.value)}
             />
           </div>
 
@@ -121,8 +149,8 @@ const Stokcikis = (props) => {
               type="name"
               className="form-control exampleInputEmail1"
               id="exampleInputPassword"
-              value={alıcı}
-              onChange={(e) => setAlıcı(e.target.value)}
+              value={costumer}
+              onChange={(e) => setCostumer(e.target.value)}
             />
           </div>
           <div
@@ -136,8 +164,8 @@ const Stokcikis = (props) => {
               type="name"
               className="form-control exampleInputEmail1"
               id="exampleInputPasswo"
-              value={açıklama}
-              onChange={(e) => setAçıklama(e.target.value)}
+              value={explatation}
+              onChange={(e) => setExplatation(e.target.value)}
             />
           </div>
 
@@ -149,19 +177,20 @@ const Stokcikis = (props) => {
               Alış Tarihi *
             </label>
             <input
+              min="1899-01-01"
               max={today}
               type="date"
               className="form-control exampleInputEmail1"
               id="exampleInputPasswoq"
-              value={tarih}
-              onChange={(e) => setTarih(e.target.value)}
+              value={shoppingDate}
+              onChange={(e) => setShoppingDate(e.target.value)}
             />
           </div>
           <span style={{ color: "rgba(0, 0, 0, 0.452)" }}>
             * işaretli olanlar doldurulması mecburi alanlardır
           </span>
         </form>
-        <Canvas2 />
+        <BuyingCanvas />
 
         <table className="table">
           <thead>
@@ -171,18 +200,17 @@ const Stokcikis = (props) => {
               <th scope="col">Ürün</th>
               <th scope="col">Fotograf</th>
               <th scope="col">Sınıf</th>
-              <th scope="col">Stokta</th>
-              <th scope="col">Satılan</th>
+              <th scope="col">Alınan</th>
               <th scope="col">Birim</th>
             </tr>
           </thead>
-          <tbody className="deneme2">
-            {props.mydata.satılıyor.map((item) => (
+          <tbody className="margin deneme2">
+            {props.mydata.buyingNow.map((item) => (
               <tr key={Math.random()}>
-                <th className="idid1">
+                <th className="margin">
                   <svg
-                    className="idid1 bi bi-x-lg"
-                    onClick={() => props.sil2(item.id)}
+                    className="margin bi bi-x-lg"
+                    onClick={() => props.del(item.id)}
                     style={{ cursor: "pointer" }}
                     color="red"
                     xmlns="http://www.w3.org/2000/svg"
@@ -194,31 +222,22 @@ const Stokcikis = (props) => {
                     <path d="M1.293 1.293a1 1 0 0 1 1.414 0L8 6.586l5.293-5.293a1 1 0 1 1 1.414 1.414L9.414 8l5.293 5.293a1 1 0 0 1-1.414 1.414L8 9.414l-5.293 5.293a1 1 0 0 1-1.414-1.414L6.586 8 1.293 2.707a1 1 0 0 1 0-1.414z" />
                   </svg>
                 </th>
-                <th className="idid1">{item.id}</th>
-                <td className="idid1">{item.ürün}</td>
-                <td>
-                  <img className="listemm" width={"40"} src={item.fotograf} alt="photo4" />
-                </td>
-                <td className="idid1">{item.sınıf}</td>
-                <td className="idid1">
-                  {
-                    props.mydata.data.find(
-                      (dataitem) => dataitem.id === item.id
-                    ).stok
-                  }
-                </td>
-                <td className="idid1">
-                  <Deneme2
-                    props={props}
-                    item={item}
-                    sınır={
-                      props.mydata.data.find(
-                        (dataitem) => dataitem.id === item.id
-                      ).stok
-                    }
+                <th className="margin">{item.id}</th>
+                <td className="margin">{item.productName}</td>
+                <td className="margin">
+                  <img
+                    className="list"
+                    width={"40"}
+                    src={item.productPhoto}
+                    alt="photo3"
                   />
                 </td>
-                <td className="idid1">{item.birim}</td>
+                <td className="margin">{item.productClass}</td>
+                <td className="margin">
+                  <BuyingValue props={props} item={item} />
+                </td>
+
+                <td className="margin">{item.productUnit}</td>
               </tr>
             ))}
           </tbody>
@@ -232,7 +251,7 @@ const Stokcikis = (props) => {
         >
           <h4>Belgeleyen:</h4>
           <div>
-            <h4>{props.mydata.kullanıcı.kullanıcıAdı}</h4>
+            <h4>{props.mydata.user.userName}</h4>
             <h5>{new Date().toLocaleDateString()} </h5>
           </div>
         </div>
@@ -243,43 +262,25 @@ const Stokcikis = (props) => {
             let boş = 0;
 
             const adım = () => {
-              for (let i = 1; i < props.mydata.satılıyor.length + 1; i++) {
+              for (let i = 1; i < props.mydata.buyingNow.length + 1; i++) {
                 if (
                   document.querySelector(
-                    `.deneme2 > tr:nth-child( ${i} ) > td:nth-child(7) > div > input`
+                    `.deneme2 > tr:nth-child( ${i} ) > td:nth-child(6) > div > input`
                   ).value === ""
                 ) {
                   alert(
-                    "lütfen eklediğiniz ürünlere ne kadar satış yapacaksanız yazınız"
+                    "lütfen eklediğiniz ürünlere ne kadar ekleme yapacaksanız yazınız"
                   );
                   boş = 1;
                   break;
                 }
-
-                if (
-                  Number(
-                    document.querySelector(
-                      `.deneme2 > tr:nth-child( ${i} ) > td:nth-child(7) > div > input`
-                    ).value
-                  ) >
-                  Number(
-                    document.querySelector(
-                      `.deneme2 > tr:nth-child( ${i} ) > td:nth-child(6)`
-                    ).innerHTML
-                  )
-                ) {
-                  alert("Lütfen stogunuzdaki miktardan az giriş yapın");
-                  boş = 1;
-                  break;
-                }
-
                 if (
                   document.querySelector(
-                    `.deneme2 > tr:nth-child( ${i} ) > td:nth-child(7) > div > input`
+                    `.deneme2 > tr:nth-child( ${i} ) > td:nth-child(6) > div > input`
                   ).value === "0"
                 ) {
                   alert(
-                    "Lütfen mikratı 0 olan ürünü çıkarın veya miktarı arttırın"
+                    "lütfen eklediğiniz ürünlere 0'dan yüksek bir sayı yazınız"
                   );
                   boş = 1;
                   break;
@@ -289,78 +290,79 @@ const Stokcikis = (props) => {
               if (boş === 1) {
                 boş = 0;
               } else {
-                let onay = window.confirm("Satış İşlemini Onaylıyor Musunuz ?");
+                let onay = window.confirm(
+                  "Satın Alma İşlemini Onaylıyor Musunuz ?"
+                );
 
                 if (onay === true) {
-                  for (let i = 1; i < props.mydata.satılıyor.length + 1; i++) {
-                    props.artılarıEkleme2(
+                  for (let i = 1; i < props.mydata.buyingNow.length + 1; i++) {
+                    props.plus(
                       enn,
                       document.querySelector(
                         `.deneme2 > tr:nth-child( ${i} ) > th:nth-child(2)`
                       ).innerHTML,
                       document.querySelector(
-                        `.deneme2 > tr:nth-child( ${i} ) > td:nth-child(7) > div > input`
+                        `.deneme2 > tr:nth-child( ${i} ) > td:nth-child(6) > div > input`
                       ).value
                     );
                   }
 
-                  for (let i = 1; i < props.mydata.satılıyor.length + 1; i++) {
-                    props.ürünHareketiEkleme(
+                  for (let i = 1; i < props.mydata.buyingNow.length + 1; i++) {
+                    props.addProductProcess(
                       enn,
-                      alıcı,
-                      alınanŞirket,
-                      açıklama,
-                      belgeNo,
-                      satıcı,
-                      tarih,
+                      costumer,
+                      company,
+                      explatation,
+                      docNo,
+                      seller,
+                      shoppingDate,
                       document.querySelector(
                         `.deneme2 > tr:nth-child( ${i} ) > th:nth-child(2)`
                       ).innerHTML,
                       document.querySelector(
-                        `.deneme2 > tr:nth-child( ${i} ) > td:nth-child(7) > div > input`
+                        `.deneme2 > tr:nth-child( ${i} ) > td:nth-child(6) > div > input`
                       ).value
                     );
                   }
 
-                  props.sonEkleme2(
+                  props.add(
                     enn,
-                    alıcı,
-                    alınanŞirket,
-                    açıklama,
-                    belgeNo,
-                    satıcı,
-                    tarih
+                    costumer,
+                    company,
+                    explatation,
+                    docNo,
+                    seller,
+                    shoppingDate
                   );
 
-                  setBelgeNo("");
-                  setAlınanŞirket("");
-                  setSatıcı("");
-                  setAlıcı("");
-                  setAçıklama("");
-                  setTarih("");
+                  setDocNo("");
+                  setCompany("");
+                  setSeller("");
+                  setCostumer("");
+                  setExplatation("");
+                  setShoppingDate("");
                 }
               }
             };
+            let docNoControl = 0;
 
-            let BelgeVarMı = 0;
-
-            props.mydata.yapılanSatışlar.find((alış) =>
-              alış[0].belgeNo === belgeNo
-                ? props.mydata.yapılanSatışlar.find((alış) =>
-                    alış[0].belgeNo === belgeNo ? (BelgeVarMı = 1) : {}
+            props.mydata.taken.find((take) =>
+              take[0].DocumentNo === docNo
+                ? props.mydata.taken.find((take) =>
+                    take[0].DocumentNo === docNo ? (docNoControl = 1) : {}
                   )
                 : {}
             );
 
-            if (BelgeVarMı === 1) {
+            if (docNoControl === 1) {
               alert("Bu Belge Numarası İle Zaten Evrak Düzenlenmiş");
-              BelgeVarMı = 0;
+              docNoControl = 0;
             } else {
-              belgeNo === ""
+              docNo === ""
                 ? alert("Lütfen Belge Numarası Giriniz")
-                : alınanŞirket === ""
+                : company === ""
                 ? alert("Lütfen Şirket Adı Giriniz")
-                : tarih === ""
+                : shoppingDate === ""
                 ? alert("Lütfen Alış Tarihi Giriniz")
                 : document.querySelector(
                     `.deneme2 > tr:nth-child( 1 ) > th:nth-child(2)`
@@ -375,14 +377,14 @@ const Stokcikis = (props) => {
         <button
           className="btn btn-primary m-2"
           onClick={() => {
-            setBelgeNo("");
-            setAlınanŞirket("");
-            setSatıcı("");
-            setAlıcı("");
-            setAçıklama("");
-            setTarih("");
+            setDocNo("");
+            setCompany("");
+            setSeller("");
+            setCostumer("");
+            setExplatation("");
+            setShoppingDate("");
 
-            props.belgeyiTemizle2();
+            props.clearDocBuy();
           }}
         >
           {" "}
@@ -400,12 +402,38 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, {
-  sil2,
-  giriş,
-  belgeEkle,
-  artılarıEkleme2,
-  sonEkleme2,
-  eklemeHatası,
-  belgeyiTemizle2,
-  ürünHareketiEkleme,
-})(Stokcikis);
+  login,
+  logout,
+  del,
+  deleteItem,
+  buying,
+  selling,
+  newProduct,
+  productClass,
+  unit,
+  addNewProduct,
+
+  plus,
+  minus,
+  add,
+  push,
+
+  clearDocBuy,
+  clearDocSell,
+  buyyingLink,
+  sellingLink,
+  cancelBuyying,
+  cancelSelling,
+  cancelPlus,
+  cancelMinus,
+  changeEntery,
+  changeEscape,
+  changeProcess,
+  addPersonel,
+  deletePersonel,
+  product,
+  addProductProcess,
+  addingProductProcess,
+  deleteProductBuyying,
+  deleteProductSelling,
+})(Buying);

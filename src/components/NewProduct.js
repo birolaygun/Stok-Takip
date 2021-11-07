@@ -1,26 +1,54 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import {
-  sil,
-  giriş,
-  alınıyor,
-  yeniUrun,
-  sınıf,
-  birim,
-  yeniÜrünEkle,
+  login,
+  logout,
+  del,
+  deleteItem,
+  buying,
+  selling,
+  newProduct,
+  productClass,
+  unit,
+  addNewProduct,
+  
+  plus,
+  minus,
+  add,
+  push,
+  
+  
+  clearDocBuy,
+  clearDocSell,
+  buyyingLink,
+  sellingLink,
+  cancelBuyying,
+  cancelSelling,
+  cancelPlus,
+  cancelMinus,
+  changeEntery,
+  changeEscape,
+  changeProcess,
+  addPersonel,
+  deletePersonel,
+  product,
+  addProductProcess,
+  addingProductProcess,
+  deleteProductBuyying,
+  deleteProductSelling,
 } from "../actions";
 
-const Upcanvas = (props) => {
-  const [ekle, setEkle] = useState("");
-  const [ekleBirim, setEkleBirim] = useState("");
-  const [urunAdı, setUrunAdı] = useState("");
-  const [urunId, setUrunId] = useState("");
-  const [urunSınıf, setUrunSınıf] = useState("");
-  const [urunFoto, setUrunFoto] = useState("");
-  const [urunBirim, setUrunBirim] = useState("");
+const NewProduct = (props) => {
+  const [add, setAdd] = useState("");
+  const [addUnit, setAddUnit] = useState("");
+  const [productName, setProductName] = useState("");
+  const [productId, setProductId] = useState("");
+  const [addClass, setaAddClass] = useState("");
+  const [productPhoto, setProductPhoto] = useState("");
+  const [productUnit, setProductUnit] = useState("");
   return (
     <div>
-      <div className="accordion-item yeniEkle">
+      <div className="accordion-item addNew">
         <h2 className="accordion-header" id="headingThree">
           <button
             className="accordion-button collapsed bg-primary "
@@ -43,35 +71,35 @@ const Upcanvas = (props) => {
           <div className="accordion-body">
             <form
               onSubmit={(e) => {
-                setUrunAdı("");
-                setUrunId("");
-                setUrunSınıf("");
-                setUrunFoto("");
-                setUrunBirim("");
+                setProductName("");
+                setProductId("");
+                setaAddClass("");
+                setProductPhoto("");
+                setProductUnit("");
                 e.preventDefault();
-                props.yeniÜrünEkle(
+                props.addNewProduct(
                   e,
-                  urunId,
-                  urunAdı,
-                  urunBirim,
-                  urunSınıf,
-                  urunFoto
+                  productId,
+                  productName,
+                  productUnit,
+                  addClass,
+                  productPhoto
                 );
               }}
             >
               <input
-                onChange={(e) => setUrunId(e.target.value)}
+                onChange={(e) => setProductId(e.target.value)}
                 style={{ margin: "2px", width: "345px", height: "38px" }}
                 type="text"
                 placeholder="Seri No"
-                value={urunId}
+                value={productId}
               />
               <input
-                onChange={(e) => setUrunAdı(e.target.value)}
+                onChange={(e) => setProductName(e.target.value)}
                 style={{ margin: "2px", width: "345px", height: "38px" }}
                 type="text"
                 placeholder="Ürün Adı"
-                value={urunAdı}
+                value={productName}
               />
 
               <div
@@ -88,15 +116,15 @@ const Upcanvas = (props) => {
                   style={{ width: "295px", height: "38px" }}
                   className="form-select"
                   aria-label="Default select example"
-                  value={urunBirim}
-                  onChange={(e) => setUrunBirim(e.target.value)}
+                  value={productUnit}
+                  onChange={(e) => setProductUnit(e.target.value)}
                 >
                   <option key={Math.random()} defaultValue>
                     Birim Seç
                   </option>
-                  {props.mydata.birimler.map((birim) => (
-                    <option key={Math.random()} value={birim}>
-                      {birim}
+                  {props.mydata.units.map((unit) => (
+                    <option key={Math.random()} value={unit}>
+                      {unit}
                     </option>
                   ))}
                 </select>
@@ -107,15 +135,15 @@ const Upcanvas = (props) => {
                 >
                   <button
                     onClick={() => {
-                      if (ekleBirim === "") {
+                      if (addUnit === "") {
                         alert("Lütfen eklemek istediğiniz birimi girin");
-                      } else if (ekleBirim === null) {
+                      } else if (addUnit === null) {
                         alert("Lütfen eklemek istediğiniz birimi girin");
                       } else if (
-                        window.confirm(`${ekleBirim} birim olarak eklensin mi?`)
+                        window.confirm(`${addUnit} birim olarak eklensin mi?`)
                       ) {
-                        props.birim(ekleBirim);
-                        setEkleBirim("");
+                        props.unit(addUnit);
+                        setAddUnit("");
                       }
                     }}
                     className="btn btn-outline-secondary btn-primarybtn btn-primary"
@@ -136,10 +164,10 @@ const Upcanvas = (props) => {
                   <input
                     style={{ width: "120px" }}
                     placeholder="Yeni Birim Ekle"
-                    value={ekleBirim}
+                    value={addUnit}
                     type="text"
                     onChange={(e) => {
-                      setEkleBirim(e.target.value);
+                      setAddUnit(e.target.value);
                     }}
                   />
                 </div>
@@ -159,15 +187,15 @@ const Upcanvas = (props) => {
                   style={{ width: "295px", height: "38px" }}
                   className="form-select"
                   aria-label="Default select example"
-                  onChange={(e) => setUrunSınıf(e.target.value)}
-                  value={urunSınıf}
+                  onChange={(e) => setaAddClass(e.target.value)}
+                  value={addClass}
                 >
                   <option key={Math.random()} defaultValue>
                     Sınıf Seç
                   </option>
-                  {props.mydata.sınıflar.map((sınıf) => (
-                    <option key={Math.random()} value={sınıf}>
-                      {sınıf}
+                  {props.mydata.classes.map((classes) => (
+                    <option key={Math.random()} value={classes}>
+                      {classes}
                     </option>
                   ))}
                 </select>
@@ -178,15 +206,15 @@ const Upcanvas = (props) => {
                 >
                   <button
                     onClick={() => {
-                      if (ekle === "") {
+                      if (add === "") {
                         alert("Lütfen eklemek istediğiniz sınıfı girin");
-                      } else if (ekle === null) {
+                      } else if (add === null) {
                         alert("Lütfen eklemek istediğiniz sınıfı girin");
                       } else if (
-                        window.confirm(`${ekle} sınıf olarak eklensin mi?`)
+                        window.confirm(`${add} sınıf olarak eklensin mi?`)
                       ) {
-                        props.sınıf(ekle);
-                        setEkle("");
+                        props.productClass(add);
+                        setAdd("");
                       }
                     }}
                     className="btn btn-outline-secondary btn-primary"
@@ -207,16 +235,16 @@ const Upcanvas = (props) => {
                   <input
                     style={{ width: "120px" }}
                     placeholder="Yeni Sınıf Ekle"
-                    value={ekle}
+                    value={add}
                     type="text"
-                    onChange={(e) => setEkle(e.target.value)}
+                    onChange={(e) => setAdd(e.target.value)}
                   />
                 </div>
               </div>
 
               <input
-                onChange={(e) => setUrunFoto(e.target.value)}
-                value={urunFoto}
+                onChange={(e) => setProductPhoto(e.target.value)}
+                value={productPhoto}
                 style={{
                   margin: "2px",
                   width: "345px",
@@ -245,11 +273,38 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, {
-  sil,
-  giriş,
-  alınıyor,
-  yeniUrun,
-  sınıf,
-  birim,
-  yeniÜrünEkle,
-})(Upcanvas);
+  login,
+  logout,
+  del,
+  deleteItem,
+  buying,
+  selling,
+  newProduct,
+  productClass,
+  unit,
+  addNewProduct,
+
+  plus,
+  minus,
+  add,
+  push,
+
+  clearDocBuy,
+  clearDocSell,
+  buyyingLink,
+  sellingLink,
+  cancelBuyying,
+  cancelSelling,
+  cancelPlus,
+  cancelMinus,
+  changeEntery,
+  changeEscape,
+  changeProcess,
+  addPersonel,
+  deletePersonel,
+  product,
+  addProductProcess,
+  addingProductProcess,
+  deleteProductBuyying,
+  deleteProductSelling,
+})(NewProduct);

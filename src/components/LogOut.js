@@ -1,9 +1,45 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { kalk } from "../actions";
+import {
+  login,
+  logout,
+  del,
+  deleteItem,
+  buying,
+  selling,
+  newProduct,
+  productClass,
+  unit,
+  addNewProduct,
+  
+  plus,
+  minus,
+  add,
+  push,
+  
+  
+  clearDocBuy,
+  clearDocSell,
+  buyyingLink,
+  sellingLink,
+  cancelBuyying,
+  cancelSelling,
+  cancelPlus,
+  cancelMinus,
+  changeEntery,
+  changeEscape,
+  changeProcess,
+  addPersonel,
+  deletePersonel,
+  product,
+  addProductProcess,
+  addingProductProcess,
+  deleteProductBuyying,
+  deleteProductSelling,
+} from "../actions";
 
-const Kalk = (props) => {
+const LogOut = (props) => {
   return (
     <div className="m-3">
       <div
@@ -31,10 +67,10 @@ const Kalk = (props) => {
             fontWeight: "bold",
           }}
         >
-          {props.mydata.kullanıcı.kullanıcıAdı}
+          {props.mydata.user.userName}
         </span>
       </div>
-      
+
       <Link
         to="/"
         style={{
@@ -43,7 +79,7 @@ const Kalk = (props) => {
       >
         <button
           className="btn btn-danger d-block w-100"
-          onClick={() => props.kalk()}
+          onClick={() => props.logout()}
         >
           Çıkış Yap
         </button>
@@ -58,4 +94,39 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { kalk })(Kalk);
+export default connect(mapStateToProps, {
+  login,
+  logout,
+  del,
+  deleteItem,
+  buying,
+  selling,
+  newProduct,
+  productClass,
+  unit,
+  addNewProduct,
+
+  plus,
+  minus,
+  add,
+  push,
+
+  clearDocBuy,
+  clearDocSell,
+  buyyingLink,
+  sellingLink,
+  cancelBuyying,
+  cancelSelling,
+  cancelPlus,
+  cancelMinus,
+  changeEntery,
+  changeEscape,
+  changeProcess,
+  addPersonel,
+  deletePersonel,
+  product,
+  addProductProcess,
+  addingProductProcess,
+  deleteProductBuyying,
+  deleteProductSelling,
+})(LogOut);

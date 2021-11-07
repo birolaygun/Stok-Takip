@@ -2,16 +2,16 @@ import React from "react";
 import { connect } from "react-redux";
 import "./style.css";
 import { Route } from "react-router-dom";
-import Personel from "./components/Personel";
-import Depo from "./components/Depo";
-import DepoGiriş from "./components/DepoGiriş";
-import Stokcikis from "./components/Stokcikis";
-import Işlemler from "./components/Işlemler";
-import Yetkilendirme from "./components/Yetkilendirme";
-import Kalk from "./components/Kalk";
-import Alışişlemi from "./components/Alışişlemi";
-import Satışişlemi from "./components/Satışişlemi";
-import Urun from "./components/Urun";
+import Login from "./components/Login";
+import Repo from "./components/Repo";
+import Buying from "./components/Buying";
+import Selling from "./components/Selling";
+import Processes from "./components/Processes";
+import Authority from "./components/Authority";
+import LogOut from "./components/LogOut";
+import BuyingProcess from "./components/BuyingProcess";
+import SellingProcess from "./components/SellingProcess";
+import Product from "./components/Product";
 import { Link } from "react-router-dom";
 import depo from "../src/depo.png"
 
@@ -19,7 +19,7 @@ const App = (props) => {
 
   return (
     <div className="App">
-      <div className="Apply">
+      <div className="apply">
         <div className="logo">
           <img src={depo} alt="" />
         </div>
@@ -34,11 +34,11 @@ const App = (props) => {
 
             <Link
               to="/alış"
-              className={props.mydata.kullanıcı.giriş ? " " : "disabled-link"}
+              className={props.mydata.user.entry ? " " : "disabled-link"}
             >
               <button
                 className={`btn btn-primary ${
-                  props.mydata.kullanıcı.giriş ? " " : "disabled"
+                  props.mydata.user.entry ? " " : "disabled"
                 } `}
               >
                 <span>Alış</span>
@@ -47,11 +47,11 @@ const App = (props) => {
 
             <Link
               to="/satış"
-              className={props.mydata.kullanıcı.çıkış ? " " : "disabled-link"}
+              className={props.mydata.user.checkOut ? " " : "disabled-link"}
             >
               <button
                 className={`btn btn-primary ${
-                  props.mydata.kullanıcı.çıkış ? " " : "disabled"
+                  props.mydata.user.checkOut ? " " : "disabled"
                 } `}
               >
                 <span>Satış</span>
@@ -60,13 +60,11 @@ const App = (props) => {
 
             <Link
               to="/işlemler"
-              className={
-                props.mydata.kullanıcı.işlemler ? " " : "disabled-link"
-              }
+              className={props.mydata.user.processes ? " " : "disabled-link"}
             >
               <button
                 className={`btn btn-primary ${
-                  props.mydata.kullanıcı.işlemler ? "" : "disabled"
+                  props.mydata.user.processes ? "" : "disabled"
                 } `}
               >
                 <span>İşlemler</span>
@@ -76,7 +74,7 @@ const App = (props) => {
             <Link to="/yetkilendirme">
               <button
                 className={`btn btn-warning ${
-                  props.mydata.kullanıcı.yetkilendirme ? "" : "d-none"
+                  props.mydata.user.authority ? "" : "d-none"
                 } `}
               >
                 <span>Yetkilendirme</span>
@@ -87,27 +85,29 @@ const App = (props) => {
         </nav>
 
         <div className="login">
-          {props.mydata.giriş ? <Kalk /> : <Personel />}
+          {props.mydata.login ? <LogOut /> : <Login />}
         </div>
       </div>
-
-
       <Route
-        path={`/işlemler/alış_${props.mydata.alınıyor2}`.toLowerCase()}
+        path={`/işlemler/alış_${props.mydata.buyingItem}`.toLowerCase()}
         exact
-        component={Alışişlemi}
+        component={BuyingProcess}
       />
       <Route
-        path={`/işlemler/satış_${props.mydata.satılıyor2}`.toLowerCase()}
+        path={`/işlemler/satış_${props.mydata.sellingItem}`.toLowerCase()}
         exact
-        component={Satışişlemi}
+        component={SellingProcess}
       />
-      <Route path="/" exact component={Depo} />
-      <Route path="/alış" exact component={DepoGiriş} />
-      <Route path="/satış" exact component={Stokcikis} />
-      <Route path="/işlemler" exact component={Işlemler} />
-      <Route path="/yetkilendirme" exact component={Yetkilendirme} />
-      <Route path={`/${props.mydata.urun2}`.toLowerCase()} exact component={Urun} />
+      <Route path="/" exact component={Repo} />
+      <Route path="/alış" exact component={Buying} />
+      <Route path="/satış" exact component={Selling} />
+      <Route path="/işlemler" exact component={Processes} />
+      <Route path="/yetkilendirme" exact component={Authority} />
+      <Route
+        path={`/${props.mydata.product}`.toLowerCase()}
+        exact
+        component={Product}
+      />
     </div>
   );
 };
@@ -119,4 +119,3 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps)(App);
-// export default connect(mapStateToProps, { sepeteEkle })(App);

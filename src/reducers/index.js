@@ -1,474 +1,455 @@
 import {
-  data,
-  giriş,
+  repository,
+  login,
   personel,
-  kullanıcıGeçici,
-  kullanıcı,
-  alınıyor,
-  sınıflar,
-  birimler,
-  bilgiler,
-  yapılanAlışlar,
-  alınıyor2,
-  satılıyor,
-  yapılanSatışlar,
-  urun2,
-  urunHareketleri,
+  person,
+  user,
+  buyingNow,
+  classes,
+  units,
+  datas,
+  taken,
+  buyingItem,
+  sellingNow,
+  sellingProcess,
+  product,
+  productProcess,
 } from "../data";
 
 const INITIAL_STATE = {
-  data,
-  giriş,
+  repository,
+  login,
   personel,
-  kullanıcıGeçici,
-  kullanıcı,
-  alınıyor,
-  sınıflar,
-  birimler,
-  bilgiler,
-  yapılanAlışlar,
-  alınıyor2,
-  satılıyor,
-  yapılanSatışlar,
-  urun2,
-  urunHareketleri,
+  person,
+  user,
+  buyingNow,
+  classes,
+  units,
+  datas,
+  taken,
+  buyingItem,
+  sellingNow,
+  sellingProcess,
+  product,
+  productProcess,
 };
 
 export const reducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case "GİRİŞ":
-      { state.personel.find((perns) => perns.kullanıcıAdı === action.gkullanıcı)
-          ? state.personel.find(
-              (perns) => perns.kullanıcıAdı === action.gkullanıcı
-            ).şifre === action.gşifre
-            ? console.log("giriş başarılı")
+    case "LOGIN":
+      {
+        state.personel.find((perns) => perns.userName === action.user)
+          ? state.personel.find((perns) => perns.userName === action.user)
+              .password === action.password
+            ? console.log("login başarılı")
             : alert("şifre hatalı")
           : alert("kullanıcı adı hatalı");
       }
-
       return {
         ...state,
 
-        kullanıcı: state.personel.find(
-          (perns) => perns.kullanıcıAdı === action.gkullanıcı
-        )
-          ? state.personel.find(
-              (perns) => perns.kullanıcıAdı === action.gkullanıcı
-            ).şifre === action.gşifre
-            ? state.personel.find(
-                (perns) => perns.kullanıcıAdı === action.gkullanıcı
-              )
-            : { ...state.kullanıcı }
-          : { ...state.kullanıcı },
+        user: state.personel.find((perns) => perns.userName === action.user)
+          ? state.personel.find((perns) => perns.userName === action.user)
+              .password === action.password
+            ? state.personel.find((perns) => perns.userName === action.user)
+            : { ...state.user }
+          : { ...state.user },
 
-        giriş: state.personel.find(
-          (perns) => perns.kullanıcıAdı === action.gkullanıcı
-        )
-          ? state.personel.find(
-              (perns) => perns.kullanıcıAdı === action.gkullanıcı
-            ).şifre === action.gşifre
+        login: state.personel.find((perns) => perns.userName === action.user)
+          ? state.personel.find((perns) => perns.userName === action.user)
+              .password === action.password
             ? true
             : false
           : false,
       };
 
-    case "KALK":
+    case "LOGOUT":
       return {
         ...state,
 
-        giriş: false,
-        kullanıcı: {
-          kullanıcıAdı: null,
-          şifre: null,
-          giriş: false,
-          çıkış: false,
-          işlemler: false,
-          yetkilendirme: false,
+        login: false,
+        user: {
+          userName: null,
+          password: null,
+          entry: false,
+          checkOut: false,
+          processes: false,
+          authority: false,
         },
       };
 
-    case "SIL":
+    case "DEL":
       return {
         ...state,
-        alınıyor: state.alınıyor.find((sil) => sil.id === action.payload)
-          ? state.alınıyor.filter((filt) => filt.id !== action.payload)
-          : [...state.alınıyor],
-      };
-    case "SIL2":
-      return {
-        ...state,
-        satılıyor: state.satılıyor.find((sil) => sil.id === action.payload)
-          ? state.satılıyor.filter((filt) => filt.id !== action.payload)
-          : [...state.satılıyor],
+        buyingNow: state.buyingNow.find((sil) => sil.id === action.payload)
+          ? state.buyingNow.filter((filt) => filt.id !== action.payload)
+          : [...state.buyingNow],
       };
 
-    case "ALINIYOR":
+    case "DELETE_ITEM":
       return {
         ...state,
-        alınıyor: [...state.alınıyor, { ...action.payload, artı: 0 }],
+        sellingNow: state.sellingNow.find((sil) => sil.id === action.payload)
+          ? state.sellingNow.filter((filt) => filt.id !== action.payload)
+          : [...state.sellingNow],
       };
-    case "SATILIYOR":
+
+    case "BUYİNG":
       return {
         ...state,
-        satılıyor: [...state.satılıyor, { ...action.payload, eksi: 0 }],
+        buyingNow: [...state.buyingNow, { ...action.payload, plus: 0 }],
       };
 
-    case "YENI_URUN":
+    case "SELLING":
       return {
         ...state,
-
-        alınıyor: [alınıyor.filter((saas) => saas.id !== action.payload.id)],
+        sellingNow: [...state.sellingNow, { ...action.payload, minus: 0 }],
       };
 
-    case "SINIF":
+    case "NEW_PRODUCT":
       return {
         ...state,
 
-        sınıflar: [...sınıflar, action.payload],
+        buyingNow: [
+          buyingNow.filter((filter) => filter.id !== action.payload.id),
+        ],
       };
-    case "BİRİM":
+
+    case "PRODUCT_CLASS":
       return {
         ...state,
 
-        birimler: [...birimler, action.payload],
+        classes: [...classes, action.payload],
+      };
+    case "UNIT":
+      return {
+        ...state,
+        units: [...units, action.payload],
       };
 
-    case "YENİ_ÜRÜN_EKLE":
-
+    case "ADD_NEW_PRODUCT":
       action.id === ""
         ? alert("Lütfen Seri No giriniz")
-        : state.data.find((item) => item.id === action.id)
+        : state.repository.find((item) => item.id === action.id)
         ? alert(
             "Bu Seri No zaten kullanılıyor. Lütfen Benzersiz bir Seri No giriniz."
           )
-        : action.ad === ""
+        : action.name === ""
         ? alert("Lütfen Ürün Adı giriniz")
-        : action.snf === ""
+        : action.classes === ""
         ? alert(
             "Lütfen Birim seçiniz. Listede yoksa Yeni Birim ekleyip seçiniz."
           )
-        : action.brm === ""
+        : action.unit === ""
         ? alert(
             "Lütfen Sınıf seçiniz. Listede yoksa Yeni Sınıf ekleyip seçiniz."
           )
-        : action.foto === ""
+        : action.photo === ""
         ? alert("Lütfen Fotoğraf Linki giriniz")
         : console.log(".");
 
       return {
         ...state,
 
-        data:
+        repository:
           action.id === ""
-            ? [...state.data]
-            : state.data.find((item) => item.id === action.id)
-            ? [...state.data]
-            : action.ad === ""
-            ? [...state.data]
-            : action.snf === ""
-            ? [...state.data]
-            : action.brm === ""
-            ? [...state.data]
-            : action.foto === ""
-            ? [...state.data]
+            ? [...state.repository]
+            : state.repository.find((item) => item.id === action.id)
+            ? [...state.repository]
+            : action.name === ""
+            ? [...state.repository]
+            : action.classes === ""
+            ? [...state.repository]
+            : action.unit === ""
+            ? [...state.repository]
+            : action.photo === ""
+            ? [...state.repository]
             : [
-                ...state.data,
+                ...state.repository,
                 {
                   id: action.id,
-                  ürün: action.ad,
-                  sınıf: action.snf,
-                  birim: action.brm,
-                  fotograf: action.foto,
-                  stok: 0,
-                }
+                  productName: action.name,
+                  productClass: action.classes,
+                  productUnit: action.unit,
+                  productPhoto: action.photo,
+                  stock: 0,
+                },
               ],
       };
 
-    case "BELGE_EKLE":
-      return {
-        ...state,
-      };
-
-    case "ARTILARI_EKLEME":
+    case "PLUS":
       return {
         ...state,
 
-        alınıyor: state.alınıyor.map((içerik) =>
-          içerik.id === action.item
+        buyingNow: state.buyingNow.map((cancel) =>
+          cancel.id === action.item
             ? {
-                ...içerik,
-                artı: Number(action.değer),
+                ...cancel,
+                plus: Number(action.value),
               }
-            : { ...içerik }
+            : { ...cancel }
         ),
 
-        data: state.data.map((içerik) =>
-          içerik.id === action.item
+        repository: state.repository.map((cancel) =>
+          cancel.id === action.item
             ? {
-                ...içerik,
-                stok: içerik.stok + Number(action.değer),
+                ...cancel,
+                stock: cancel.stock + Number(action.value),
               }
-            : { ...içerik }
+            : { ...cancel }
         ),
       };
 
-    case "ARTILARI_EKLEME2":
+    case "MINUS":
       return {
         ...state,
 
-        satılıyor: state.satılıyor.map((içerik) =>
-          içerik.id === action.item
+        sellingNow: state.sellingNow.map((cancel) =>
+          cancel.id === action.item
             ? {
-                ...içerik,
-                eksi: Number(action.değer),
+                ...cancel,
+                minus: Number(action.value),
               }
-            : { ...içerik }
+            : { ...cancel }
         ),
 
-        data: state.data.map((içerik) =>
-          içerik.id === action.item
+        repository: state.repository.map((cancel) =>
+          cancel.id === action.item
             ? {
-                ...içerik,
-                stok: içerik.stok - Number(action.değer),
+                ...cancel,
+                stock: cancel.stock - Number(action.value),
               }
-            : { ...içerik }
+            : { ...cancel }
         ),
       };
 
-    case "SON_EKLEME":
+    case "ADD":
       return {
         ...state,
 
-        yapılanAlışlar: [
-          ...state.yapılanAlışlar,
+        taken: [
+          ...state.taken,
           [
             {
-              alıcı: action.alıcı,
-              alınanŞirket: action.alınanŞirket,
-              açıklama: action.açıklama,
-              belgeNo: action.belgeNo,
-              satıcı: action.satıcı,
-              tarih: action.tarih,
-              onayVerenKullanıcı: state.kullanıcı.kullanıcıAdı,
-              onayTarihi: new Date().toLocaleDateString(),
+              costumer: action.costumer,
+              company: action.company,
+              explanation: action.explatation,
+              DocumentNo: action.docNo,
+              seller: action.seller,
+              shoppingData: action.shoppingDate,
+              userChecked: state.user.userName,
+              dateChecked: new Date().toLocaleDateString(),
             },
-            state.alınıyor,
+            state.buyingNow,
           ],
         ],
 
-        alınıyor: [],
+        buyingNow: [],
       };
-    case "SON_EKLEME2":
+
+    case "PUSH":
       return {
         ...state,
 
-        yapılanSatışlar: [
-          ...state.yapılanSatışlar,
+        sellingProcess: [
+          ...state.sellingProcess,
           [
             {
-              alıcı: action.alıcı,
-              alınanŞirket: action.alınanŞirket,
-              açıklama: action.açıklama,
-              belgeNo: action.belgeNo,
-              satıcı: action.satıcı,
-              tarih: action.tarih,
-              onayVerenKullanıcı: state.kullanıcı.kullanıcıAdı,
-              onayTarihi: new Date().toLocaleDateString(),
+              costumer: action.costumer,
+              company: action.company,
+              explanation: action.explanation,
+              DocumentNo: action.docNo,
+              seller: action.seller,
+              shoppingData: action.shopppingDate,
+              userChecked: state.user.userName,
+              dateChecked: new Date().toLocaleDateString(),
             },
-            state.satılıyor,
+
+            state.sellingNow,
           ],
         ],
 
-        satılıyor: [],
+        sellingNow: [],
       };
 
-    case "EKLEME_HATASI":
+    case "CLEAR_DOC_BUY":
       return {
         ...state,
+        buyingNow: [],
       };
-    case "EKLEME_HATASI2":
+    case "CLEAR_DOC_SELL":
       return {
         ...state,
-      };
-    case "BELGEYİ_TEMİZLE":
-      return {
-        ...state,
-        alınıyor: [],
-      };
-    case "BELGEYİ_TEMİZLE2":
-      return {
-        ...state,
-        satılıyor: [],
+        sellingNow: [],
       };
 
-    case "LİNK":
+    case "BUYING_LINK":
       return {
         ...state,
-        alınıyor2: action.payload,
+        buyingItem: action.payload,
       };
 
-    case "LİNK2":
+    case "SELLING_LINK":
       return {
         ...state,
-        satılıyor2: action.payload,
+        sellingItem: action.payload,
       };
 
-    case "ALIŞ_İŞLEMİ_SİLME":
+    case "CANCEL_BUYING":
       return {
         ...state,
 
-        yapılanAlışlar: state.yapılanAlışlar.filter(
-          (alış) => alış[0].belgeNo !== state.alınıyor2
+        taken: state.taken.filter((buy) => buy[0].DocumentNo !== state.buyingItem),
+
+        buyingItem: [],
+      };
+
+    case "CANCEL_SELLING":
+      return {
+        ...state,
+
+        sellingProcess: state.sellingProcess.filter(
+          (sell) => sell[0].DocumentNo !== state.sellingItem
         ),
 
-        alınıyor2: [],
+        sellingItem: [],
       };
 
-    case "SATIŞ_İŞLEMİ_SİLME":
+    case "CANCEL_PLUS":
       return {
         ...state,
-
-        yapılanSatışlar: state.yapılanSatışlar.filter(
-          (alış) => alış[0].belgeNo !== state.satılıyor2
-        ),
-
-        satılıyor2: [],
-      };
-
-    case "ARTILARI_SİLME":
-      return {
-        ...state,
-        data: state.data.map((içerik) =>
-          içerik.id === action.id
+        repository: state.repository.map((cancel) =>
+          cancel.id === action.id
             ? {
-                ...içerik,
-                stok: içerik.stok - Number(action.değer),
+                ...cancel,
+                stock: cancel.stock - Number(action.value),
               }
-            : { ...içerik }
+            : { ...cancel }
         ),
       };
 
-    case "ARTILARI_SİLME2":
+    case "CANCEL_MINUS":
       return {
         ...state,
-        data: state.data.map((içerik) =>
-          içerik.id === action.id
+        repository: state.repository.map((cancel) =>
+          cancel.id === action.id
             ? {
-                ...içerik,
-                stok: içerik.stok + Number(action.değer),
+                ...cancel,
+                stock: cancel.stock + Number(action.value),
               }
-            : { ...içerik }
+            : { ...cancel }
         ),
       };
 
-    case "GİRİŞ_DEĞİŞ":
+    case "CHANGE_ENTERY":
       return {
         ...state,
         personel: state.personel.map((pers) =>
-          pers.kullanıcıAdı === action.payload
-            ? { ...pers, giriş: !pers.giriş }
+          pers.userName === action.payload
+            ? { ...pers, entry: !pers.entry }
             : { ...pers }
         ),
       };
 
-    case "ÇIKIŞ_DEĞİŞ":
+    case "CHANGE_ESCAPE":
       return {
         ...state,
         personel: state.personel.map((pers) =>
-          pers.kullanıcıAdı === action.payload
-            ? { ...pers, çıkış: !pers.çıkış }
+          pers.userName === action.payload
+            ? { ...pers, checkOut: !pers.checkOut }
             : { ...pers }
         ),
       };
 
-    case "İŞLEM_DEĞİŞ":
+    case "CHANGE_PROCESS":
       return {
         ...state,
         personel: state.personel.map((pers) =>
-          pers.kullanıcıAdı === action.payload
-            ? { ...pers, işlemler: !pers.işlemler }
+          pers.userName === action.payload
+            ? { ...pers, processes: !pers.processes }
             : { ...pers }
         ),
       };
-    case "KULLANICI_EKLE":
+
+    case "ADD_PERSONEL":
+      console.log(action);
       return {
         ...state,
         personel: [
           ...state.personel,
           {
-            kullanıcıAdı: action.payload,
-            şifre: "asdfasdf",
-            giriş: action.girş,
-            çıkış: action.çıkş,
-            işlemler: action.işlm,
-            yetkilendirme: false,
+            userName: action.payload,
+            password: "asdfasdf",
+            entry: action.entry,
+            checkOut: action.checkOut,
+            processes: action.process,
+            authority: false,
           },
         ],
       };
-    case "PERSONELİ_SİL":
+
+    case "DELETE_PERSONEL":
       return {
         ...state,
         personel: state.personel.filter(
-          (pers) => pers.kullanıcıAdı !== action.payload
+          (pers) => pers.userName !== action.payload
         ),
       };
-    case "URUN2":
+
+    case "PRODUCT":
       return {
         ...state,
-        urun2: action.payload,
+        product: action.payload,
       };
 
-    case "URUN_HAREKETI_EKLE":
+    case "ADD_PRODUCT_PROCESS":
       return {
         ...state,
-        urunHareketleri: [
-          ...state.urunHareketleri,
+        productProcess: [
+          ...state.productProcess,
           {
             id: action.item,
-            belgeNo: action.belgeNo,
-            işlem: "alış",
-            değer: action.değer,
-            alıcı: action.alıcı,
-            alınanŞirket: action.alınanŞirket,
-            tarih: action.tarih,
+            DocumentNo: action.docNo,
+            process: "alış",
+            values: action.value,
+            costumer: action.costumer,
+            company: action.company,
+            shoppingData: action.shoppingDate,
           },
         ],
       };
 
-    case "URUN_HAREKET_EKLEME":
+    case "ADDING_PRODUCT_PROCESS":
       return {
         ...state,
-        urunHareketleri: [
-          ...state.urunHareketleri,
+        productProcess: [
+          ...state.productProcess,
           {
             id: action.item,
-            belgeNo: action.belgeNo,
-            işlem: "satış",
-            değer: action.değer,
-            alıcı: action.alıcı,
-            alınanŞirket: action.alınanŞirket,
-            tarih: action.tarih,
+            DocumentNo: action.docNo,
+            process: "satış",
+            values: action.value,
+            costumer: action.costumer,
+            company: action.company,
+            shoppingData: action.shoppingDate,
           },
         ],
       };
 
-    case "URUN_HAREKETI_ALIS_SILME":
+    case "DELETE_PRODUCT_BUYYING":
       return {
         ...state,
-        urunHareketleri: 
-          state.urunHareketleri.filter(
-            (urun) => urun.belgeNo !== action.payload
-          )
-        
+        productProcess: state.productProcess.filter(
+          (product) => product.DocumentNo !== action.payload
+        ),
       };
 
-    case "URUN_HAREKETI_SATIŞ_SILME":
+    case "DELETE_PRODUCT_SELLING":
       return {
         ...state,
-        urunHareketleri: 
-          state.urunHareketleri.filter(
-            (urun) => urun.belgeNo !== action.payload
-          )
+        productProcess: state.productProcess.filter(
+          (product) => product.DocumentNo !== action.payload
+        ),
       };
 
     default:

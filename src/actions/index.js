@@ -1,305 +1,263 @@
 
-export const giriş = (eventq, gkullanıcı, gşifre) => {
-  return { type: "GİRİŞ", payload: eventq, gkullanıcı, gşifre };
+export const login = (e, user, password) => {
+  return { type: "LOGIN", payload: e, user, password };
 };
 
-export const kalk = (eventq) => {
-  return { type: "KALK", payload: eventq };
+export const logout = () => {
+  return { type: "LOGOUT"};
 };
 
-export const sil = (eventq) => {
-  return { type: "SIL", payload: eventq };
+export const del = (e) => {
+  return { type: "DEL", payload: e };
 };
-export const sil2 = (eventq) => {
-  return { type: "SIL2", payload: eventq };
-};
-
-export const alınıyor = (eventq) => {
-  return { type: "ALINIYOR", payload: eventq };
-};
-export const satılıyor = (eventq) => {
-  return { type: "SATILIYOR", payload: eventq };
+export const deleteItem
+ = (e) => {
+  return { type: "DELETE_ITEM", payload: e };
 };
 
-export const yeniUrun = (eventq) => {
-  return { type: "YENI_URUN", payload: eventq };
+export const buying = (e) => {
+  return { type: "BUYİNG", payload: e };
+};
+export const selling = (e) => {
+  return { type: "SELLING", payload: e };
 };
 
-export const sınıf = (eventq) => {
-  return { type: "SINIF", payload: eventq };
+export const newProduct = (e) => {
+  return { type: "NEW_PRODUCT", payload: e };
 };
 
-export const birim = (eventq) => {
-  return { type: "BİRİM", payload: eventq };
-};
-export const yeniÜrünEkle = (even, id, ad, brm, snf, foto) => {
-  return { type: "YENİ_ÜRÜN_EKLE", payload: even, id, ad, brm, snf, foto };
+export const productClass
+ = (e) => {
+  return { type: "PRODUCT_CLASS", payload: e };
 };
 
-export const belgeEkle = (
-  e,
-alıcı,
-  alınanŞirket,
-  açıklama,
-  belgeNo,
-  satıcı,
-  tarih
-) => {
+export const unit = (e) => {
+  return { type: "UNIT", payload: e };
+};
+export const addNewProduct = (even, id, name, unit, classes, photo) => {
   return {
-    type: "BELGE_EKLE",
+    type: "ADD_NEW_PRODUCT",
+    payload: even,
+    id,
+    name,
+    unit,
+    classes,
+    photo,
+  };
+};
+
+export const plus = (e, item, value) => {
+  return {
+    type: "PLUS",
     payload: e,
-    alıcı,
-    alınanŞirket,
-    açıklama,
-    belgeNo,
-    satıcı,
-    tarih,
-  };
-};
-
-
-
-export const artılarıEkleme = (
-  eventq,
-  item,
-  değer,
-
-) => {
-  return {
-    type: "ARTILARI_EKLEME",
-    payload: eventq,
     item,
-    değer,
-
+    value,
   };
 };
-export const artılarıEkleme2 = (
-  eventq,
-  item,
-  değer,
-
-) => {
+export const minus = (e, item, value) => {
   return {
-    type: "ARTILARI_EKLEME2",
-    payload: eventq,
+    type: "MINUS",
+    payload: e,
     item,
-    değer,
-
+    value,
   };
 };
-export const sonEkleme = (
-  eventq,
-  alıcı,
-  alınanŞirket,
-  açıklama,
-  belgeNo,
-  satıcı,
-  tarih
+export const add = (
+  e,
+  costumer,
+  company,
+  explatation,
+  docNo,
+  seller,
+  shoppingDate
 ) => {
   return {
-    type: "SON_EKLEME",
-    payload: eventq,
-    alıcı,
-    alınanŞirket,
-    açıklama,
-    belgeNo,
-    satıcı,
-    tarih,
+    type: "ADD",
+    payload: e,
+    costumer,
+    company,
+    explatation,
+    docNo,
+    seller,
+    shoppingDate,
   };
 };
-export const sonEkleme2 = (
-  eventq,
-  alıcı,
-  alınanŞirket,
-  açıklama,
-  belgeNo,
-  satıcı,
-  tarih
+
+export const push = (
+  e,
+  costumer,
+  company,
+  explanation,
+  docNo,
+  seller,
+  shopppingDate
 ) => {
   return {
-    type: "SON_EKLEME2",
-    payload: eventq,
-    alıcı,
-    alınanŞirket,
-    açıklama,
-    belgeNo,
-    satıcı,
-    tarih,
+    type: "PUSH",
+    payload: e,
+    costumer,
+    company,
+    explanation,
+    docNo,
+    seller,
+    shopppingDate,
   };
 };
 
-export const eklemeHatası = (
-  eventq,
-) => {
+export const clearDocBuy = () => {
   return {
-    type: "EKLEME_HATASI",
-    payload: eventq
+    type: "CLEAR_DOC_BUY",
   };
 };
-export const eklemeHatası2 = (
-  eventq,
-) => {
+export const clearDocSell = () => {
   return {
-    type: "EKLEME_HATASI2",
-    payload: eventq
+    type: "CLEAR_DOC_SELL",
   };
 };
 
-
-export const belgeyiTemizle = () => {
+export const buyyingLink = (e) => {
   return {
-    type: "BELGEYİ_TEMİZLE"
+    type: "BUYING_LINK",
+    payload: e,
   };
 };
-export const belgeyiTemizle2 = () => {
+export const sellingLink = (e) => {
   return {
-    type: "BELGEYİ_TEMİZLE2"
+    type: "SELLING_LINK",
+    payload: e,
   };
 };
-
-export const link = (evev) => {
+export const cancelBuyying = (e) => {
   return {
-    type: "LİNK",
-    payload: evev
+    type: "CANCEL_BUYING",
+    payload: e,
   };
 };
-export const link2 = (evev) => {
+export const cancelSelling = (e) => {
   return {
-    type: "LİNK2",
-    payload: evev
+    type: "CANCEL_SELLING",
+    payload: e,
   };
 };
-export const alışİşlemiSilme = (evev) => {
+export const cancelPlus = (e, id, value) => {
   return {
-    type: "ALIŞ_İŞLEMİ_SİLME",
-    payload: evev,
-  };
-};
-export const satışİşlemiSilme = (evev) => {
-  return {
-    type: "SATIŞ_İŞLEMİ_SİLME",
-    payload: evev,
-  };
-};
-export const artılarıSilme = (enn, id, değer) => {
-  return {
-    type: "ARTILARI_SİLME",
-    payload: enn,
+    type: "CANCEL_PLUS",
+    payload: e,
     id,
-    değer,
+    value,
   };
 };
 
-export const artılarıSilme2 = (enn, id, değer) => {
+export const cancelMinus = (e, id, value) => {
   return {
-    type: "ARTILARI_SİLME2",
-    payload: enn,
+    type: "CANCEL_MINUS",
+    payload: e,
     id,
-    değer,
+    value,
   };
 };
-export const girişDeğiş = (person) => {
+export const changeEntery = (person) => {
   return {
-    type: "GİRİŞ_DEĞİŞ",
+    type: "CHANGE_ENTERY",
     payload: person,
   };
 };
-export const çıkışDeğiş = (person) => {
+export const changeEscape = (person) => {
   return {
-    type: "ÇIKIŞ_DEĞİŞ",
+    type: "CHANGE_ESCAPE",
     payload: person,
   };
 };
-export const işlemDeğiş = (person) => {
+export const changeProcess = (person) => {
   return {
-    type: "İŞLEM_DEĞİŞ",
+    type: "CHANGE_PROCESS",
     payload: person,
   };
 };
-export const kullanıcıEkle = (kullanıcı, girş, çıkş, işlm) => {
+export const addPersonel = (user, entry, checkOut, process) => {
   return {
-    type: "KULLANICI_EKLE",
-    payload: kullanıcı,
-    girş,
-    çıkş,
-    işlm,
+    type: "ADD_PERSONEL",
+    payload: user,
+    entry,
+    checkOut,
+    process,
   };
 };
-export const personeliSil = (kullanıcıAdı) => {
+export const deletePersonel = (user) => {
   return {
-    type: "PERSONELİ_SİL",
-    payload: kullanıcıAdı,
+    type: "DELETE_PERSONEL",
+    payload: user,
   };
 };
-export const urun2 = (seri) => {
+export const product = (id) => {
   return {
-    type: "URUN2",
-    payload: seri,
+    type: "PRODUCT",
+    payload: id,
   };
 };
 
-export const urunHareketiEkle = (
-  enn,
-  alıcı,
-  alınanŞirket,
-  açıklama,
-  belgeNo,
-  satıcı,
-  tarih,
+export const addProductProcess = (
+  e,
+  costumer,
+  company,
+  explatation,
+  docNo,
+  seller,
+  shoppingDate,
   item,
-  değer
+  value
 ) => {
   return {
-    type: "URUN_HAREKETI_EKLE",
-    payload: enn,
-    alıcı,
-    alınanŞirket,
-    açıklama,
-    belgeNo,
-    satıcı,
-    tarih,
+    type: "ADD_PRODUCT_PROCESS",
+    payload: e,
+    costumer,
+    company,
+    explatation,
+    docNo,
+    seller,
+    shoppingDate,
     item,
-    değer,
+    value,
   };
 };
 
-export const ürünHareketiEkleme = (
-  enn,
-  alıcı,
-  alınanŞirket,
-  açıklama,
-  belgeNo,
-  satıcı,
-  tarih,
+export const addingProductProcess = (
+  e,
+  costumer,
+  company,
+  explatation,
+  docNo,
+  seller,
+  shoppingDate,
   item,
-  değer,
+  value
 ) => {
   return {
-    type: "URUN_HAREKET_EKLEME",
-    payload: enn,
-    alıcı,
-    alınanŞirket,
-    açıklama,
-    belgeNo,
-    satıcı,
-    tarih,
+    type: "ADDING_PRODUCT_PROCESS",
+    payload: e,
+    costumer,
+    company,
+    explatation,
+    docNo,
+    seller,
+    shoppingDate,
     item,
-    değer,
+    value,
   };
 };
 
-export const ürünHareketiAlışSilme = (belgeNo) => {
+export const deleteProductBuyying = (docNo) => {
   return {
-    type: "URUN_HAREKETI_ALIS_SILME",
-    payload: belgeNo,
+    type: "DELETE_PRODUCT_BUYYING",
+    payload: docNo,
   };
 };
 
 
-export const ürünHareketleriSatışIplal = (belgeNo) => {
+export const deleteProductSelling = (docNo) => {
   return {
-    type: "URUN_HAREKETI_SATIŞ_SILME",
-    payload: belgeNo,
+    type: "DELETE_PRODUCT_SELLING",
+    payload: docNo,
   };
 };
 

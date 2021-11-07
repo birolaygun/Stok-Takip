@@ -2,18 +2,44 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import {
-  sil,
-  giriş,
-  belgeEkle,
-  artılarıEkleme,
-  sonEkleme,
-  eklemeHatası,
-  belgeyiTemizle,
-  link,
-  link2,
+  login,
+  logout,
+  del,
+  deleteItem,
+  buying,
+  selling,
+  newProduct,
+  productClass,
+  unit,
+  addNewProduct,
+  
+  plus,
+  minus,
+  add,
+  push,
+  
+  
+  clearDocBuy,
+  clearDocSell,
+  buyyingLink,
+  sellingLink,
+  cancelBuyying,
+  cancelSelling,
+  cancelPlus,
+  cancelMinus,
+  changeEntery,
+  changeEscape,
+  changeProcess,
+  addPersonel,
+  deletePersonel,
+  product,
+  addProductProcess,
+  addingProductProcess,
+  deleteProductBuyying,
+  deleteProductSelling,
 } from "../actions";
 
-const Işlemler = (props) => {
+const Processes = (props) => {
   return (
     <div>
       <div
@@ -24,7 +50,7 @@ const Işlemler = (props) => {
         }}
       >
         <h2
-          className="anaBaşlık mb-2"
+          className="mainHead mb-2"
           style={{
             backgroundColor: "#00FFFF",
             marginBottom: "0px",
@@ -45,22 +71,22 @@ const Işlemler = (props) => {
             </thead>
 
             <tbody>
-              {props.mydata.yapılanAlışlar.map((item) => (
+              {props.mydata.taken.map((item) => (
                 <tr key={Math.random()}>
-                 
-                    <th
-                      className="linked"
-                      onClick={() => props.link(`${item[0].belgeNo}`)}
-                    >
-                       <Link
+                  <th
                     className="linked"
-                    to={`/işlemler/alış_${item[0].belgeNo.toLowerCase()}`}
-                  >{item[0].belgeNo}</Link>
-                    </th>{" "}
-                  
-                  <td>{item[0].alınanŞirket}</td>
-                  <td>{item[0].tarih}</td>
-                  <td>{item[0].onayVerenKullanıcı}</td>
+                    onClick={() => props.buyyingLink(`${item[0].DocumentNo}`)}
+                  >
+                    <Link
+                      className="linked"
+                      to={`/işlemler/alış_${item[0].DocumentNo.toLowerCase()}`}
+                    >
+                      {item[0].DocumentNo}
+                    </Link>
+                  </th>{" "}
+                  <td>{item[0].company}</td>
+                  <td>{item[0].shoppingData}</td>
+                  <td>{item[0].userChecked}</td>
                 </tr>
               ))}
             </tbody>
@@ -76,7 +102,7 @@ const Işlemler = (props) => {
         }}
       >
         <h2
-          className="anaBaşlık mb-2"
+          className="mainHead mb-2"
           style={{
             backgroundColor: "#f08080",
             marginBottom: "0px",
@@ -97,22 +123,22 @@ const Işlemler = (props) => {
             </thead>
 
             <tbody>
-              {props.mydata.yapılanSatışlar.map((item) => (
+              {props.mydata.sellingProcess.map((item) => (
                 <tr key={Math.random()}>
                   <th
                     className="linked"
-                    onClick={() => props.link2(`${item[0].belgeNo}`)}
+                    onClick={() => props.sellingLink(`${item[0].DocumentNo}`)}
                   >
                     <Link
                       className="linked"
-                      to={`/işlemler/satış_${item[0].belgeNo.toLowerCase()}`}
+                      to={`/işlemler/satış_${item[0].DocumentNo.toLowerCase()}`}
                     >
-                      {item[0].belgeNo}
+                      {item[0].DocumentNo}
                     </Link>
                   </th>{" "}
-                  <td>{item[0].alınanŞirket}</td>
-                  <td>{item[0].tarih}</td>
-                  <td>{item[0].onayVerenKullanıcı}</td>
+                  <td>{item[0].company}</td>
+                  <td>{item[0].shoppingData}</td>
+                  <td>{item[0].userChecked}</td>
                 </tr>
               ))}
             </tbody>
@@ -130,13 +156,38 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, {
-  sil,
-  giriş,
-  belgeEkle,
-  artılarıEkleme,
-  sonEkleme,
-  eklemeHatası,
-  belgeyiTemizle,
-  link,
-  link2,
-})(Işlemler);
+  login,
+  logout,
+  del,
+  deleteItem,
+  buying,
+  selling,
+  newProduct,
+  productClass,
+  unit,
+  addNewProduct,
+
+  plus,
+  minus,
+  add,
+  push,
+
+  clearDocBuy,
+  clearDocSell,
+  buyyingLink,
+  sellingLink,
+  cancelBuyying,
+  cancelSelling,
+  cancelPlus,
+  cancelMinus,
+  changeEntery,
+  changeEscape,
+  changeProcess,
+  addPersonel,
+  deletePersonel,
+  product,
+  addProductProcess,
+  addingProductProcess,
+  deleteProductBuyying,
+  deleteProductSelling,
+})(Processes);

@@ -11,7 +11,7 @@
   width: calc(90vw - 200px);
 }
 
-.yeniEkle {
+.addNew {
   background-color: rgba(31, 27, 253, 0.938);
 }
 .linked {
@@ -46,18 +46,11 @@
   width: 150px;
 }
 
-.Apply {
-  display: flex;
-  justify-content: space-between;
-  margin: 10px;
-  height: 96.82px;
-}
-
 body {
   background-color: rgba(43, 241, 255, 0.096);
 }
 
-.anaBaşlık {
+.mainHead {
   margin: auto;
   text-align: center;
   font-weight: bolder;
@@ -67,47 +60,109 @@ body {
   border: 1px solid transparent;
   background-color: rgba(0, 153, 255, 0.295);
 }
-.listemm {
+.list {
   position: static;
   transform: scale(1);
-  transform-origin: right;
+  transform-origin:right;
   transition: all 0.3s ease;
 }
-.listemm:hover {
+.list:hover {
   transform: scale(10);
   position: relative;
   display: block;
   z-index: 999;
-  right: 1px;
+  bottom: 1px;
 }
 
-.idid {
-  color: black;
-  text-decoration: none;
-  padding-top: 18px;
-}
-.idid1 {
-  vertical-align: middle;
-}
-.özetleme {
+#offcanvasRight > div.offcanvas-body > table > tbody > tr:nth-child(1) > th:nth-child(1) > div > svg
+
+
+.sum {
   font-size: 25px;
 }
-.alışş{
+.buying{
   background-color: rgba(52, 113, 245, 0.212);
 }
-.satışş{
+.selling{
   background-color: rgba(252, 105, 105, 0.233);
 }
-.imary{
+.summary{
   background-color: rgba(0, 255, 128, 0.479);
   border-radius: 8px;
 padding: 8px;
 }
-.ortala{
-  font-size: 22px;
-  padding-top: 8px;
+.apply {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px;
+  height: 96.82px;
 }
-.ortala1{
+
+.center{
   font-size: 20px;
   padding-top: 12px;
+}
+.adminPanel svg {
+  cursor: pointer;
+}
+.canvas svg{
+  cursor: pointer
+}
+.tableBudy > tr > th > a {
+  text-decoration: none;
+  color: black;
+}
+.margin {
+  vertical-align: middle;
+}
+
+.tbudyPr tr > th > a {
+   text-decoration: none;
+  color: black;
+}
+.phone{display: none;}
+
+@media screen and (min-width: 470px) and (max-width: 750px) {
+
+*{
+  font-size: 0.9rem;
+}
+.logo img{
+  display: none;
+}
+
+.list:hover {
+  transform: scale(4);
+}
+
+}
+
+@media screen and (min-width: 1px) and (max-width: 469px) {
+
+.App{
+  display: none;
+}
+.phone{display: block;
+position: relative;
+z-index: 99;
+width: 50vw;
+height: 50vw;
+left: 25vw;
+top: 25vh;
+animation-name: phone;
+animation-duration: 2s;
+animation-timing-function: ease;
+animation-iteration-count: infinite;
+
+}
+
+@keyframes phone {
+  0%   {transform:  rotate( 0deg)}
+  50%  {transform:  rotate( 0deg)}
+  62%  {transform:  rotate( 45deg)}
+  75%  {transform:  rotate( 0deg)}
+  87%  {transform:  rotate( 45deg)}
+  100% {transform:  rotate( 0deg)}
+}
+
 }

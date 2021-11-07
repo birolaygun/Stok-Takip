@@ -2,23 +2,53 @@
 import React, {useState} from "react";
 import { connect } from "react-redux";
 import {
-  girişDeğiş,
-  çıkışDeğiş,
-  işlemDeğiş,
-  kullanıcıEkle,
-  personeliSil,
+  login,
+  logout,
+  del,
+  deleteItem,
+  buying,
+  selling,
+  newProduct,
+  productClass,
+  unit,
+  addNewProduct,
+  
+  plus,
+  minus,
+  add,
+  push,
+  
+  
+  clearDocBuy,
+  clearDocSell,
+  buyyingLink,
+  sellingLink,
+  cancelBuyying,
+  cancelSelling,
+  cancelPlus,
+  cancelMinus,
+  changeEntery,
+  changeEscape,
+  changeProcess,
+  addPersonel,
+  deletePersonel,
+  product,
+  addProductProcess,
+  addingProductProcess,
+  deleteProductBuyying,
+  deleteProductSelling,
 } from "../actions";
 
-const Yetkilendirme = (props) => {
-  const [kullanıcı, setKullanıcı] = useState("")
-  const [girş, setGirş] = useState(false)
-  const [çıkş, setÇıkş] = useState(false);
-  const [işlm, setİşlm] = useState(false);
+const Authority = (props) => {
+  const [user, setUser] = useState("")
+  const [entry, setEntry] = useState(false)
+  const [checkOut, setCheckOut] = useState(false);
+  const [process, setProcess] = useState(false);
 
 
   return (
-    <div>
-      <h2 className="anaBaşlık">Personel Yetkilendirme</h2>
+    <div className="adminPanel">
+      <h2 className="mainHead">Personel Yetkilendirme</h2>
       <br />
       <div>
         <table className="table">
@@ -35,13 +65,13 @@ const Yetkilendirme = (props) => {
             {props.mydata.personel.map((person) => (
               <tr
                 key={Math.random()}
-                className={person.kullanıcıAdı === "Admin" ? "d-none " : ""}
+                className={person.userName === "Admin" ? "d-none " : ""}
               >
-                <th>{person.kullanıcıAdı}</th>
+                <th>{person.userName}</th>
                 <td>
-                  {person.giriş ? (
+                  {person.entry ? (
                     <svg
-                      onClick={() => props.girişDeğiş(person.kullanıcıAdı)}
+                      onClick={() => props.changeEntery(person.userName)}
                       xmlns="http://www.w3.org/2000/svg"
                       width="16"
                       height="16"
@@ -54,7 +84,7 @@ const Yetkilendirme = (props) => {
                     </svg>
                   ) : (
                     <svg
-                      onClick={() => props.girişDeğiş(person.kullanıcıAdı)}
+                      onClick={() => props.changeEntery(person.userName)}
                       xmlns="http://www.w3.org/2000/svg"
                       width="16"
                       height="16"
@@ -67,9 +97,9 @@ const Yetkilendirme = (props) => {
                   )}
                 </td>
                 <td>
-                  {person.çıkış ? (
+                  {person.checkOut ? (
                     <svg
-                      onClick={() => props.çıkışDeğiş(person.kullanıcıAdı)}
+                      onClick={() => props.changeEscape(person.userName)}
                       xmlns="http://www.w3.org/2000/svg"
                       width="16"
                       height="16"
@@ -82,7 +112,7 @@ const Yetkilendirme = (props) => {
                     </svg>
                   ) : (
                     <svg
-                      onClick={() => props.çıkışDeğiş(person.kullanıcıAdı)}
+                      onClick={() => props.changeEscape(person.userName)}
                       xmlns="http://www.w3.org/2000/svg"
                       width="16"
                       height="16"
@@ -96,9 +126,9 @@ const Yetkilendirme = (props) => {
                 </td>
                 <td>
                   {" "}
-                  {person.işlemler ? (
+                  {person.processes ? (
                     <svg
-                      onClick={() => props.işlemDeğiş(person.kullanıcıAdı)}
+                      onClick={() => props.changeProcess(person.userName)}
                       xmlns="http://www.w3.org/2000/svg"
                       width="16"
                       height="16"
@@ -111,7 +141,7 @@ const Yetkilendirme = (props) => {
                     </svg>
                   ) : (
                     <svg
-                      onClick={() => props.işlemDeğiş(person.kullanıcıAdı)}
+                      onClick={() => props.changeProcess(person.userName)}
                       xmlns="http://www.w3.org/2000/svg"
                       width="16"
                       height="16"
@@ -127,7 +157,10 @@ const Yetkilendirme = (props) => {
             ))}
           </tbody>
         </table>
-        <p className="m-2"> Tüm personeliniz Depo içerisindeki envanteri görebilmektedir. </p>
+        <p className="m-2">
+          {" "}
+          Tüm personeliniz Depo içerisindeki envanteri görebilmektedir.{" "}
+        </p>
       </div>
 
       <button
@@ -156,16 +189,16 @@ const Yetkilendirme = (props) => {
             </p>
             <input
               type="name"
-              value={kullanıcı}
+              value={user}
               style={{ width: "350px", marginBottom: "5px" }}
               placeholder="kullanıcı Adı"
-              onChange={(e) => setKullanıcı(e.target.value)}
+              onChange={(e) => setUser(e.target.value)}
             />
 
             <div className="py-1 ">
-              {girş ? (
+              {entry ? (
                 <svg
-                  onClick={() => setGirş(!girş)}
+                  onClick={() => setEntry(!entry)}
                   xmlns="http://www.w3.org/2000/svg"
                   width="16"
                   height="16"
@@ -179,7 +212,7 @@ const Yetkilendirme = (props) => {
               ) : (
                 <svg
                   className="d-inline bi bi-square"
-                  onClick={() => setGirş(!girş)}
+                  onClick={() => setEntry(!entry)}
                   xmlns="http://www.w3.org/2000/svg"
                   width="16"
                   height="16"
@@ -194,9 +227,9 @@ const Yetkilendirme = (props) => {
             </div>
 
             <div className="py-1 ">
-              {çıkş ? (
+              {checkOut ? (
                 <svg
-                  onClick={() => setÇıkş(!çıkş)}
+                  onClick={() => setCheckOut(!checkOut)}
                   xmlns="http://www.w3.org/2000/svg"
                   width="16"
                   height="16"
@@ -210,7 +243,7 @@ const Yetkilendirme = (props) => {
               ) : (
                 <svg
                   className="d-inline bi bi-square"
-                  onClick={() => setÇıkş(!çıkş)}
+                  onClick={() => setCheckOut(!checkOut)}
                   xmlns="http://www.w3.org/2000/svg"
                   width="16"
                   height="16"
@@ -225,9 +258,9 @@ const Yetkilendirme = (props) => {
             </div>
 
             <div className="py-1 ">
-              {işlm ? (
+              {process ? (
                 <svg
-                  onClick={() => setİşlm(!işlm)}
+                  onClick={() => setProcess(!process)}
                   xmlns="http://www.w3.org/2000/svg"
                   width="16"
                   height="16"
@@ -241,7 +274,7 @@ const Yetkilendirme = (props) => {
               ) : (
                 <svg
                   className="d-inline bi bi-square"
-                  onClick={() => setİşlm(!işlm)}
+                  onClick={() => setProcess(!process)}
                   xmlns="http://www.w3.org/2000/svg"
                   width="16"
                   height="16"
@@ -258,11 +291,11 @@ const Yetkilendirme = (props) => {
             <button
               className="btn btn-primary my-2"
               onClick={() => {
-                if (kullanıcı === "") {
+                if (user === "") {
                   alert("Lütfen Kullanıcı Adı giriniz");
                 } else if (
                   props.mydata.personel.find(
-                    (pers) => pers.kullanıcıAdı === kullanıcı
+                    (pers) => pers.userName === user
                   )
                 ) {
                   alert(
@@ -271,16 +304,16 @@ const Yetkilendirme = (props) => {
                 } else {
                   if (
                     window.confirm(
-                      kullanıcı +
+                      user +
                         " " +
                         "adlı personeli sisteme kaydetmek istediğinizden emin misiniz?"
                     ) === true
                   ) {
-                    props.kullanıcıEkle(kullanıcı, girş, çıkş, işlm);
-                    setKullanıcı("");
-                    setGirş(false);
-                    setÇıkş(false);
-                    setİşlm(false);
+                    props.addPersonel(user, entry, checkOut, process);
+                    setUser("");
+                    setEntry(false);
+                    setCheckOut(false);
+                    setProcess(false);
                   }
                 }
               }}
@@ -320,19 +353,19 @@ const Yetkilendirme = (props) => {
               {props.mydata.personel.map((person) => (
                 <tr
                   key={Math.random()}
-                  className={person.kullanıcıAdı === "Admin" ? "d-none " : ""}
+                  className={person.userName === "Admin" ? "d-none " : ""}
                 >
                   <td>
                     <svg
                       onClick={() => {
                         if (
                           window.confirm(
-                            person.kullanıcıAdı +
+                            person.userName +
                               " " +
                               "adlı kullanıcının sistemden silinmesini onaylıyor musunuz ?"
                           )
                         ) {
-                          props.personeliSil(person.kullanıcıAdı);
+                          props.deletePersonel(person.userName);
                         }
                       }}
                       style={{ cursor: "pointer" }}
@@ -348,7 +381,7 @@ const Yetkilendirme = (props) => {
                     </svg>
                   </td>
 
-                  <th>{person.kullanıcıAdı}</th>
+                  <th>{person.userName}</th>
                 </tr>
               ))}
             </tbody>
@@ -366,9 +399,38 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, {
-  girişDeğiş,
-  çıkışDeğiş,
-  işlemDeğiş,
-  kullanıcıEkle,
-  personeliSil,
-})(Yetkilendirme);
+  login,
+  logout,
+  del,
+  deleteItem,
+  buying,
+  selling,
+  newProduct,
+  productClass,
+  unit,
+  addNewProduct,
+
+  plus,
+  minus,
+  add,
+  push,
+
+  clearDocBuy,
+  clearDocSell,
+  buyyingLink,
+  sellingLink,
+  cancelBuyying,
+  cancelSelling,
+  cancelPlus,
+  cancelMinus,
+  changeEntery,
+  changeEscape,
+  changeProcess,
+  addPersonel,
+  deletePersonel,
+  product,
+  addProductProcess,
+  addingProductProcess,
+  deleteProductBuyying,
+  deleteProductSelling,
+})(Authority);

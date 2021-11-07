@@ -1,44 +1,70 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import {
-  sil,
-  giriş,
-  belgeEkle,
-  artılarıEkleme,
-  sonEkleme,
-  eklemeHatası,
-  belgeyiTemizle,
-  urunHareketiEkle,
+  login,
+  logout,
+  del,
+  deleteItem,
+  buying,
+  selling,
+  newProduct,
+  productClass,
+  unit,
+  addNewProduct,
+  
+  plus,
+  minus,
+  add,
+  push,
+  
+  
+  clearDocBuy,
+  clearDocSell,
+  buyyingLink,
+  sellingLink,
+  cancelBuyying,
+  cancelSelling,
+  cancelPlus,
+  cancelMinus,
+  changeEntery,
+  changeEscape,
+  changeProcess,
+  addPersonel,
+  deletePersonel,
+  product,
+  addProductProcess,
+  addingProductProcess,
+  deleteProductBuyying,
+  deleteProductSelling,
 } from "../actions";
-import Canvas from "./Canvas";
-import Deneme from "./Deneme";
+import SellingCanvas from "./SellingCanvas";
+import SellingValue from "./SellingValue";
 
-const DepoGiriş = (props) => {
-  const [belgeNo, setBelgeNo] = useState("");
-  const [alınanŞirket, setAlınanŞirket] = useState("");
-  const [satıcı, setSatıcı] = useState("");
-  const [alıcı, setAlıcı] = useState("");
-  const [açıklama, setAçıklama] = useState("");
-  const [tarih, setTarih] = useState("");
+const Selling = (props) => {
+  const [docNo, setDocNo] = useState("");
+  const [company, setCompany] = useState("");
+  const [seller, setSeller] = useState("");
+  const [costumer, setCostumer] = useState("");
+  const [explanation, setExplanation] = useState("");
+  const [shopppingDate, setShopppingDate] = useState("");
 
-
-  var today = new Date();
-  var dd = today.getDate();
-  var mm = today.getMonth() + 1; //January is 0!
-  var yyyy = today.getFullYear();
-  if (dd < 10) {
-    dd = "0" + dd;
-  }
-  if (mm < 10) {
-    mm = "0" + mm;
-  }
-  today = yyyy + "-" + mm + "-" + dd;
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth() + 1; //January is 0!
+    var yyyy = today.getFullYear();
+    if (dd < 10) {
+      dd = "0" + dd;
+    }
+    if (mm < 10) {
+      mm = "0" + mm;
+    }
+    today = yyyy + "-" + mm + "-" + dd;
 
 
   return (
     <div>
       <br />
-      <h2 className="anaBaşlık">Satın Alma Belgesi Girişi</h2>
+      <h2 className="mainHead">Satış Yapma Belgesi Oluştur</h2>
       <div
         style={{
           margin: "20px",
@@ -65,8 +91,8 @@ const DepoGiriş = (props) => {
                 type="text"
                 className="form-control d-inline exampleInputEmail1"
                 id="exampleInputE1"
-                value={belgeNo}
-                onChange={(e) => setBelgeNo(e.target.value)}
+                value={docNo}
+                onChange={(e) => setDocNo(e.target.value)}
               />
             </span>
           </div>
@@ -81,7 +107,7 @@ const DepoGiriş = (props) => {
                 className="form-label d-inline"
                 style={{ text: "center" }}
               >
-                Ürünlerin Alındığı Şirket *
+                Ürünlerin Satıldığı Şirket *
               </label>
             </span>
             <span>
@@ -89,8 +115,8 @@ const DepoGiriş = (props) => {
                 type="text"
                 className="form-control d-inline exampleInputEmail1"
                 id="exampleInputEmail1"
-                value={alınanŞirket}
-                onChange={(e) => setAlınanŞirket(e.target.value)}
+                value={company}
+                onChange={(e) => setCompany(e.target.value)}
               />
             </span>
           </div>
@@ -106,8 +132,8 @@ const DepoGiriş = (props) => {
               type="name"
               className="form-control exampleInputEmail1"
               id="exampleInputPassword1"
-              value={satıcı}
-              onChange={(e) => setSatıcı(e.target.value)}
+              value={seller}
+              onChange={(e) => setSeller(e.target.value)}
             />
           </div>
 
@@ -122,8 +148,8 @@ const DepoGiriş = (props) => {
               type="name"
               className="form-control exampleInputEmail1"
               id="exampleInputPassword"
-              value={alıcı}
-              onChange={(e) => setAlıcı(e.target.value)}
+              value={costumer}
+              onChange={(e) => setCostumer(e.target.value)}
             />
           </div>
           <div
@@ -137,8 +163,8 @@ const DepoGiriş = (props) => {
               type="name"
               className="form-control exampleInputEmail1"
               id="exampleInputPasswo"
-              value={açıklama}
-              onChange={(e) => setAçıklama(e.target.value)}
+              value={explanation}
+              onChange={(e) => setExplanation(e.target.value)}
             />
           </div>
 
@@ -150,20 +176,19 @@ const DepoGiriş = (props) => {
               Alış Tarihi *
             </label>
             <input
-              min="1899-01-01"
               max={today}
               type="date"
               className="form-control exampleInputEmail1"
               id="exampleInputPasswoq"
-              value={tarih}
-              onChange={(e) => setTarih(e.target.value)}
+              value={shopppingDate}
+              onChange={(e) => setShopppingDate(e.target.value)}
             />
           </div>
           <span style={{ color: "rgba(0, 0, 0, 0.452)" }}>
             * işaretli olanlar doldurulması mecburi alanlardır
           </span>
         </form>
-        <Canvas />
+        <SellingCanvas />
 
         <table className="table">
           <thead>
@@ -173,17 +198,18 @@ const DepoGiriş = (props) => {
               <th scope="col">Ürün</th>
               <th scope="col">Fotograf</th>
               <th scope="col">Sınıf</th>
-              <th scope="col">Alınan</th>
+              <th scope="col">Stokta</th>
+              <th scope="col">Satılan</th>
               <th scope="col">Birim</th>
             </tr>
           </thead>
-          <tbody className="idid1 deneme2">
-            {props.mydata.alınıyor.map((item) => (
+          <tbody className="deneme2">
+            {props.mydata.sellingNow.map((item) => (
               <tr key={Math.random()}>
-                <th className="idid1">
+                <th className="margin">
                   <svg
-                    className="idid1 bi bi-x-lg"
-                    onClick={() => props.sil(item.id)}
+                    className="margin bi bi-x-lg"
+                    onClick={() => props.deleteItem(item.id)}
                     style={{ cursor: "pointer" }}
                     color="red"
                     xmlns="http://www.w3.org/2000/svg"
@@ -195,17 +221,36 @@ const DepoGiriş = (props) => {
                     <path d="M1.293 1.293a1 1 0 0 1 1.414 0L8 6.586l5.293-5.293a1 1 0 1 1 1.414 1.414L9.414 8l5.293 5.293a1 1 0 0 1-1.414 1.414L8 9.414l-5.293 5.293a1 1 0 0 1-1.414-1.414L6.586 8 1.293 2.707a1 1 0 0 1 0-1.414z" />
                   </svg>
                 </th>
-                <th className="idid1">{item.id}</th>
-                <td className="idid1">{item.ürün}</td>
-                <td className="idid1">
-                  <img className="listemm" width={"40"} src={item.fotograf} alt="photo3" />
+                <th className="margin">{item.id}</th>
+                <td className="margin">{item.productName}</td>
+                <td>
+                  <img
+                    className="list"
+                    width={"40"}
+                    src={item.productPhoto}
+                    alt="photo4"
+                  />
                 </td>
-                <td className="idid1">{item.sınıf}</td>
-                <td className="idid1">
-                  <Deneme props={props} item={item} />
+                <td className="margin">{item.productClass}</td>
+                <td className="margin">
+                  {
+                    props.mydata.repository.find(
+                      (dataitem) => dataitem.id === item.id
+                    ).stock
+                  }
                 </td>
-
-                <td className="idid1">{item.birim}</td>
+                <td className="margin">
+                  <SellingValue
+                    props={props}
+                    item={item}
+                    limit={
+                      props.mydata.repository.find(
+                        (dataitem) => dataitem.id === item.id
+                      ).stock
+                    }
+                  />
+                </td>
+                <td className="margin">{item.productUnit}</td>
               </tr>
             ))}
           </tbody>
@@ -219,118 +264,135 @@ const DepoGiriş = (props) => {
         >
           <h4>Belgeleyen:</h4>
           <div>
-            <h4>{props.mydata.kullanıcı.kullanıcıAdı}</h4>
+            <h4>{props.mydata.user.userName}</h4>
             <h5>{new Date().toLocaleDateString()} </h5>
           </div>
         </div>
         <button
           type="submit"
           className="btn btn-primary m-2"
-          onClick={(enn) => {
-            let boş = 0;
+          onClick={(e) => {
+            let empty = 0;
 
             const adım = () => {
-              for (let i = 1; i < props.mydata.alınıyor.length + 1; i++) {
+              for (let i = 1; i < props.mydata.sellingNow.length + 1; i++) {
                 if (
                   document.querySelector(
-                    `.deneme2 > tr:nth-child( ${i} ) > td:nth-child(6) > div > input`
+                    `.deneme2 > tr:nth-child( ${i} ) > td:nth-child(7) > div > input`
                   ).value === ""
                 ) {
                   alert(
-                    "lütfen eklediğiniz ürünlere ne kadar ekleme yapacaksanız yazınız"
+                    "lütfen eklediğiniz ürünlere ne kadar satış yapacaksanız yazınız"
                   );
-                  boş = 1;
+                  empty = 1;
                   break;
                 }
+
+                if (
+                  Number(
+                    document.querySelector(
+                      `.deneme2 > tr:nth-child( ${i} ) > td:nth-child(7) > div > input`
+                    ).value
+                  ) >
+                  Number(
+                    document.querySelector(
+                      `.deneme2 > tr:nth-child( ${i} ) > td:nth-child(6)`
+                    ).innerHTML
+                  )
+                ) {
+                  alert("Lütfen stogunuzdaki miktardan az giriş yapın");
+                  empty = 1;
+                  break;
+                }
+
                 if (
                   document.querySelector(
-                    `.deneme2 > tr:nth-child( ${i} ) > td:nth-child(6) > div > input`
+                    `.deneme2 > tr:nth-child( ${i} ) > td:nth-child(7) > div > input`
                   ).value === "0"
                 ) {
                   alert(
-                    "lütfen eklediğiniz ürünlere 0'dan yüksek bir sayı yazınız"
+                    "Lütfen mikratı 0 olan ürünü çıkarın veya miktarı arttırın"
                   );
-                  boş = 1;
+                  empty = 1;
                   break;
                 }
               }
 
-              if (boş === 1) {
-                boş = 0;
+              if (empty === 1) {
+                empty = 0;
               } else {
-                let onay = window.confirm(
-                  "Satın Alma İşlemini Onaylıyor Musunuz ?"
-                );
+                let onay = window.confirm("Satış İşlemini Onaylıyor Musunuz ?");
 
                 if (onay === true) {
-                  for (let i = 1; i < props.mydata.alınıyor.length + 1; i++) {
-                    props.artılarıEkleme(
-                      enn,
+                  for (let i = 1; i < props.mydata.sellingNow.length + 1; i++) {
+                    props.minus(
+                      e,
                       document.querySelector(
                         `.deneme2 > tr:nth-child( ${i} ) > th:nth-child(2)`
                       ).innerHTML,
                       document.querySelector(
-                        `.deneme2 > tr:nth-child( ${i} ) > td:nth-child(6) > div > input`
+                        `.deneme2 > tr:nth-child( ${i} ) > td:nth-child(7) > div > input`
                       ).value
                     );
                   }
 
-                  for (let i = 1; i < props.mydata.alınıyor.length + 1; i++) {
-                    props.urunHareketiEkle(
-                      enn,
-                      alıcı,
-                      alınanŞirket,
-                      açıklama,
-                      belgeNo,
-                      satıcı,
-                      tarih,
+                  for (let i = 1; i < props.mydata.sellingNow.length + 1; i++) {
+                    props.addingProductProcess(
+                      e,
+                      costumer,
+                      company,
+                      explanation,
+                      docNo,
+                      seller,
+                      shopppingDate,
                       document.querySelector(
                         `.deneme2 > tr:nth-child( ${i} ) > th:nth-child(2)`
                       ).innerHTML,
                       document.querySelector(
-                        `.deneme2 > tr:nth-child( ${i} ) > td:nth-child(6) > div > input`
+                        `.deneme2 > tr:nth-child( ${i} ) > td:nth-child(7) > div > input`
                       ).value
                     );
                   }
 
-                  props.sonEkleme(
-                    enn,
-                    alıcı,
-                    alınanŞirket,
-                    açıklama,
-                    belgeNo,
-                    satıcı,
-                    tarih
+                  props.push(
+                    e,
+                    costumer,
+                    company,
+                    explanation,
+                    docNo,
+                    seller,
+                    shopppingDate
                   );
 
-                  setBelgeNo("");
-                  setAlınanŞirket("");
-                  setSatıcı("");
-                  setAlıcı("");
-                  setAçıklama("");
-                  setTarih("");
+                  setDocNo("");
+                  setCompany("");
+                  setSeller("");
+                  setCostumer("");
+                  setExplanation("");
+                  setShopppingDate("");
                 }
               }
             };
-            let BelgeVarMı = 0;
 
-            props.mydata.yapılanAlışlar.find((alış) =>
-              alış[0].belgeNo === belgeNo
-                ? props.mydata.yapılanAlışlar.find((alış) =>
-                    alış[0].belgeNo === belgeNo ? (BelgeVarMı = 1) : {}
+            let docNoControl = 0;
+
+            props.mydata.sellingProcess.find((alış) =>
+              alış[0].DocumentNo === docNo
+                ? props.mydata.sellingProcess.find((alış) =>
+                    alış[0].DocumentNo === docNo ? (docNoControl = 1) : {}
                   )
                 : {}
             );
 
-            if (BelgeVarMı === 1) {
+            if (docNoControl === 1) {
               alert("Bu Belge Numarası İle Zaten Evrak Düzenlenmiş");
-              BelgeVarMı = 0;
+              docNoControl = 0;
             } else {
-              belgeNo === ""
+              docNo === ""
                 ? alert("Lütfen Belge Numarası Giriniz")
-                : alınanŞirket === ""
+                : company === ""
                 ? alert("Lütfen Şirket Adı Giriniz")
-                : tarih === ""
+                : shopppingDate === ""
                 ? alert("Lütfen Alış Tarihi Giriniz")
                 : document.querySelector(
                     `.deneme2 > tr:nth-child( 1 ) > th:nth-child(2)`
@@ -345,14 +407,14 @@ const DepoGiriş = (props) => {
         <button
           className="btn btn-primary m-2"
           onClick={() => {
-            setBelgeNo("");
-            setAlınanŞirket("");
-            setSatıcı("");
-            setAlıcı("");
-            setAçıklama("");
-            setTarih("");
+            setDocNo("");
+            setCompany("");
+            setSeller("");
+            setCostumer("");
+            setExplanation("");
+            setShopppingDate("");
 
-            props.belgeyiTemizle();
+            props.clearDocSell();
           }}
         >
           {" "}
@@ -370,12 +432,38 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, {
-  sil,
-  giriş,
-  belgeEkle,
-  artılarıEkleme,
-  sonEkleme,
-  eklemeHatası,
-  belgeyiTemizle,
-  urunHareketiEkle,
-})(DepoGiriş);
+  login,
+  logout,
+  del,
+  deleteItem,
+  buying,
+  selling,
+  newProduct,
+  productClass,
+  unit,
+  addNewProduct,
+
+  plus,
+  minus,
+  add,
+  push,
+
+  clearDocBuy,
+  clearDocSell,
+  buyyingLink,
+  sellingLink,
+  cancelBuyying,
+  cancelSelling,
+  cancelPlus,
+  cancelMinus,
+  changeEntery,
+  changeEscape,
+  changeProcess,
+  addPersonel,
+  deletePersonel,
+  product,
+  addProductProcess,
+  addingProductProcess,
+  deleteProductBuyying,
+  deleteProductSelling,
+})(Selling);

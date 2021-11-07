@@ -1,14 +1,49 @@
 import React from "react";
 import { connect } from "react-redux";
-import { sil, giriş, alınıyor, yeniUrun } from "../actions";
-import Upcanvas from "./Upcanvas"
+import {
+  login,
+  logout,
+  del,
+  deleteItem,
+  buying,
+  selling,
+  newProduct,
+  productClass,
+  unit,
+  addNewProduct,
+  
+  plus,
+  minus,
+  add,
+  push,
+  
+  
+  clearDocBuy,
+  clearDocSell,
+  buyyingLink,
+  sellingLink,
+  cancelBuyying,
+  cancelSelling,
+  cancelPlus,
+  cancelMinus,
+  changeEntery,
+  changeEscape,
+  changeProcess,
+  addPersonel,
+  deletePersonel,
+  product,
+  addProductProcess,
+  addingProductProcess,
+  deleteProductBuyying,
+  deleteProductSelling,
+} from "../actions";
+import NewProduct from "./NewProduct";
 
 
-const Canvas = (props) => {
-
+const BuyingCanvas = (props) => {
   return (
-    <div>
-      <div style={{}}>
+    <div className="canvas">
+      <div>
         <button
           style={{ float: "right", marginRight: "10px" }}
           className="btn btn-primary sticky"
@@ -43,7 +78,7 @@ const Canvas = (props) => {
         <div className="offcanvas-header">
           <div>
             <div style={{}}>
-              <Upcanvas />
+              <NewProduct />
             </div>
 
             <div
@@ -72,19 +107,19 @@ const Canvas = (props) => {
                   </thead>
 
                   <tbody>
-                    {props.mydata.data.map((item) => (
+                    {props.mydata.repository.map((item) => (
                       <tr key={Math.random()}>
                         <th>
                           <div>
-                            {props.mydata.alınıyor.find(
-                              (checkle) => item.id === checkle.id
+                            {props.mydata.buyingNow.find(
+                              (check) => item.id === check.id
                             ) ? (
-                              props.mydata.alınıyor.map(
-                                (checkle) => item.id === checkle.id
+                              props.mydata.buyingNow.map(
+                                (check) => item.id === check.id
                               ) ? (
                                 <svg
                                   key={Math.random()}
-                                  onClick={() => props.sil(item.id)}
+                                  onClick={() => props.del(item.id)}
                                   xmlns="http://www.w3.org/2000/svg"
                                   width="16"
                                   height="16"
@@ -101,7 +136,7 @@ const Canvas = (props) => {
                             ) : (
                               <svg
                                 key={Math.random()}
-                                onClick={() => props.alınıyor(item)}
+                                onClick={() => props.buying(item)}
                                 xmlns="http://www.w3.org/2000/svg"
                                 width="16"
                                 height="16"
@@ -115,8 +150,8 @@ const Canvas = (props) => {
                           </div>
                         </th>
                         <th>{item.id}</th>
-                        <td>{item.ürün}</td>
-                        <td>{item.sınıf}</td>
+                        <td>{item.productName}</td>
+                        <td>{item.productClass}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -144,19 +179,19 @@ const Canvas = (props) => {
             </thead>
 
             <tbody>
-              {props.mydata.data.map((item) => (
+              {props.mydata.repository.map((item) => (
                 <tr key={Math.random()}>
                   <th>
                     <div>
-                      {props.mydata.alınıyor.find(
-                        (checkle) => checkle.id === item.id
+                      {props.mydata.buyingNow.find(
+                        (check) => check.id === item.id
                       ) ? (
-                        props.mydata.alınıyor.map(
-                          (checkle) => checkle.id === item.id
+                        props.mydata.buyingNow.map(
+                          (check) => check.id === item.id
                         ) ? (
                           <svg
                             key={Math.random()}
-                            onClick={() => props.sil(item.id)}
+                            onClick={() => props.del(item.id)}
                             xmlns="http://www.w3.org/2000/svg"
                             width="16"
                             height="16"
@@ -173,7 +208,7 @@ const Canvas = (props) => {
                       ) : (
                         <svg
                           key={Math.random()}
-                          onClick={() => props.alınıyor(item)}
+                          onClick={() => props.buying(item)}
                           xmlns="http://www.w3.org/2000/svg"
                           width="16"
                           height="16"
@@ -187,8 +222,8 @@ const Canvas = (props) => {
                     </div>
                   </th>
                   <th>{item.id}</th>
-                  <td>{item.ürün}</td>
-                  <td>{item.sınıf}</td>
+                  <td>{item.productName}</td>
+                  <td>{item.productClass}</td>
                 </tr>
               ))}
             </tbody>
@@ -206,6 +241,39 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { sil, giriş, alınıyor, yeniUrun })(
-  Canvas
-);
+export default connect(mapStateToProps, {
+  login,
+  logout,
+  del,
+  deleteItem,
+  buying,
+  selling,
+  newProduct,
+  productClass,
+  unit,
+  addNewProduct,
+
+  plus,
+  minus,
+  add,
+  push,
+
+  clearDocBuy,
+  clearDocSell,
+  buyyingLink,
+  sellingLink,
+  cancelBuyying,
+  cancelSelling,
+  cancelPlus,
+  cancelMinus,
+  changeEntery,
+  changeEscape,
+  changeProcess,
+  addPersonel,
+  deletePersonel,
+  product,
+  addProductProcess,
+  addingProductProcess,
+  deleteProductBuyying,
+  deleteProductSelling,
+})(BuyingCanvas);
