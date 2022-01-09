@@ -2,6 +2,9 @@ Projemin Linki https://stok-takip.netlify.app/
 
 Projemi bu linkteki videomda detaylıca anlattım. izlemek için: https://youtu.be/NHQqDsnW-hg
 
+Her yazılımcının bir gözde projesi vardır. insanlara onu tanıtınca mutlu hissettiği bir projedir bu.
+Bu proje de benim için öyle. Stok takipçisi olarak çalıştığım zamanlarda edindiğim tecrübe ile bu projeyi geliştirdim.
+
 Repomun eski adı 'Depo'ydu sonradan değiştirdim.
 
 Bu projeyi React ve Redux kullanarak geliştirdim. 
